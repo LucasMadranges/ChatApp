@@ -47,4 +47,43 @@ export class GroupResolver {
             },
         });
     }
+
+    @Mutation(() => Group)
+    async updateGroup(
+        @Args("id") id: number,
+        @Args("name") name: string,
+        @Args({name: "userList", type: () => [Int]}) userList: number[],
+    ): Promise<Group> {
+        return this.prisma.group.update({
+            where: {
+                id,
+            },
+            data: {
+                name,
+                userList: {
+                    connect: userList.map(id => ({id})),
+                },
+            },
+            include: {
+                userList: true,
+            },
+        });
+    }
+
+    @Mutation(() => Boolean)
+    async deleteGroup(
+        @Args("id") id: number,
+    ): Promise<boolean> {
+        try {
+            await this.prisma.group.delete({
+                where: {
+                    id,
+                },
+            });
+            return true;
+        } catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
 }
