@@ -1,7 +1,7 @@
+import MenuBar from "@/components/MenuBar/MenuBar";
+
 export default function Home() {
     return (
-        <main>
-            <span className="text-red-700">ÇA MARCHE</span>
-        </main>
+        <MenuBar/>
     );
 }
