@@ -4,6 +4,7 @@ import Image from "next/image";
 import ProfilPicture from "../../../public/people/people-1.jpg";
 import {MessageIcon} from "@/components/Icons/MessageIcon";
 import {PeoplesIcon} from "@/components/Icons/PeoplesIcon";
+import {AddChatIcon} from "@/components/Icons/AddChatIcon";
 
 export default function MenuBar() {
     return (
@@ -30,6 +31,10 @@ export default function MenuBar() {
                 </div>
                 <div className="flex items-center justify-center">
                     <PeoplesIcon width="32px"
+                                 height="auto"/>
+                </div>
+                <div className="flex items-center justify-center">
+                    <AddChatIcon width="32px"
                                  height="auto"/>
                 </div>
             </div>
