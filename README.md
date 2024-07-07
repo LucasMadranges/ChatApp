@@ -12,3 +12,8 @@
 - NestJS
 - Prisma
 - GraphQL
+
+## For running the project
+
+Use the command line :
+```docker-compose up --build```
