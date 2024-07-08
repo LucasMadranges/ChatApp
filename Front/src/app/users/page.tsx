@@ -1,5 +1,7 @@
+import UsersList from "@/components/UserList/UsersList";
+
 export default function Page() {
     return (
-        <h1>Users</h1>
+        <UsersList/>
     );
 }

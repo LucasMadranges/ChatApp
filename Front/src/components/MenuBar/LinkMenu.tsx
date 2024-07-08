@@ -11,14 +11,18 @@ export default function LinkMenu() {
     return (
         <div className="flex flex-col gap-2">
             <Link href="/chats"
-                  className={`flex items-center justify-center py-2 ${pathname.includes("/chats") ? "bg-gray-400 -mx-2" : ""}`}>
+                  className={`flex items-center justify-center lg:justify-start gap-2 py-2 ${pathname.includes("/chats") ? "bg-gray-600 -mx-2 px-2" : ""}`}>
                 <PeoplesIcon width="32px"
-                             height="32px"/>
+                             height="32px"
+                             color="white"/>
+                <span className="text-white text-sm">Messages</span>
             </Link>
             <Link href="/users"
-                  className={`flex items-center justify-center py-2 ${pathname.includes("/users") ? "bg-gray-400 -mx-2" : ""}`}>
+                  className={`flex items-center justify-center lg:justify-start gap-2 py-2 ${pathname.includes("/users") ? "bg-gray-600 -mx-2 px-2" : ""}`}>
                 <AddChatIcon width="32px"
-                             height="32px"/>
+                             height="32px"
+                             color="white"/>
+                <span className="text-white text-sm">Liste des utilisateurs</span>
             </Link>
         </div>
     );
