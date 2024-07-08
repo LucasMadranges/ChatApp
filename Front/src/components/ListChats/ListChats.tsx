@@ -1,7 +1,7 @@
 export default function ListChats() {
     return (
-        <div className="">
+        <section className="">
             ListChats
-        </div>
+        </section>
     );
 }
