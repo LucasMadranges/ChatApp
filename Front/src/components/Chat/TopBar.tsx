@@ -13,9 +13,9 @@ export default function TopBar() {
                 </Link>
                 <Image src={PictureReceiver}
                        alt="Photo de profil"
-                       width={48}
-                       height={48}
-                       className="rounded-full h-12 object-cover"/>
+                       width={512}
+                       height={512}
+                       className="rounded-full h-12 w-12 object-cover"/>
                 <div className="flex flex-col">
                     <span>John Doe</span>
                     <div className="flex gap-2 items-center">

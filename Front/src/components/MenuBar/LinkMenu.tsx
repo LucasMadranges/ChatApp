@@ -11,18 +11,18 @@ export default function LinkMenu() {
     return (
         <div className="flex flex-col gap-2">
             <Link href="/chats"
-                  className={`flex items-center justify-center lg:justify-start gap-2 py-2 ${pathname.includes("/chats") ? "bg-gray-600 -mx-2 px-2" : ""}`}>
+                  className={`flex items-center justify-center lg:justify-start gap-2 py-2 hover:bg-gray-800 -mx-2 px-2 transition ${pathname.includes("/chats") ? "hover:bg-gray-600 bg-gray-600" : ""}`}>
                 <PeoplesIcon width="32px"
                              height="32px"
                              color="white"/>
-                <span className="text-white text-sm">Messages</span>
+                <span className="text-white text-sm hidden lg:inline-block">Messages</span>
             </Link>
             <Link href="/users"
-                  className={`flex items-center justify-center lg:justify-start gap-2 py-2 ${pathname.includes("/users") ? "bg-gray-600 -mx-2 px-2" : ""}`}>
+                  className={`flex items-center justify-center lg:justify-start gap-2 py-2 hover:bg-gray-800 -mx-2 px-2 transition ${pathname.includes("/users") ? "hover:bg-gray-600 bg-gray-600" : ""}`}>
                 <AddChatIcon width="32px"
                              height="32px"
                              color="white"/>
-                <span className="text-white text-sm">Liste des utilisateurs</span>
+                <span className="text-white text-sm hidden lg:inline-block">Liste des utilisateurs</span>
             </Link>
         </div>
     );

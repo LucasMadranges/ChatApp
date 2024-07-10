@@ -14,7 +14,7 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
     return (
         <html lang="fr">
             <body className={`${inter.className}`}>
-                <main className="flex overflow-hidden">
+                <main className="flex overflow-hidden h-svh">
                     <MenuBar/>
                     {children}
                 </main>

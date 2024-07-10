@@ -14,9 +14,9 @@ export default function TopMenu() {
             <div className="flex flex-col items-center justify-center">
                 <Image src={ProfilPicture}
                        alt="Photo de profil"
-                       width={32}
-                       height={32}
-                       className="rounded-full h-8 lg:w-12 lg:h-12 object-cover"/>
+                       width={512}
+                       height={512}
+                       className="rounded-full h-8 w-8 lg:w-12 lg:h-12 object-cover"/>
                 <span className="hidden lg:inline-block text-white text-sm">Lucas Madranges</span>
             </div>
         </div>
