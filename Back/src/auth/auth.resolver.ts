@@ -3,6 +3,7 @@ import {PrismaService} from "../../prisma/prisma.service";
 import {User} from "../user/user.model";
 import {PasswordService} from "../password/password.service";
 import {UserService} from "../user/user.service";
+import {AuthService} from "./auth.service";
 
 @Resolver(() => User)
 export class AuthResolver {
@@ -10,6 +11,7 @@ export class AuthResolver {
         private readonly prisma: PrismaService,
         private readonly passwordService: PasswordService,
         private readonly userService: UserService,
+        private readonly authService: AuthService,
     ) {
     }
 
@@ -18,18 +20,6 @@ export class AuthResolver {
         @Args("email") email: string,
         @Args("password") password: string,
     ): Promise<User> {
-        const user = await this.userService.getUserByEmail(email);
-
-        if (!user) {
-            throw new Error("L'email est incorrect");
-        } else {
-            const isCorrectPassword = await this.passwordService.comparePasswords(password, user.password);
-
-            if (!isCorrectPassword) {
-                throw new Error("Le mot de passe est incorrect");
-            } else {
-                return user;
-            }
-        }
+        return this.authService.loginUser(email, password);
     }
 }
