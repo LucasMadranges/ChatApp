@@ -16,4 +16,7 @@ export class User {
 
     @Field()
     password: string;
+
+    @Field()
+    role?: string;
 }

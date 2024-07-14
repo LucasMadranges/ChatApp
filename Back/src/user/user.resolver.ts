@@ -1,10 +1,12 @@
 import {Args, Mutation, Query, Resolver} from "@nestjs/graphql";
 import {User} from "./user.model";
 import {PrismaService} from "../../prisma/prisma.service";
+import {Role} from "@prisma/client";
+import {PasswordService} from "../password/password.service";
 
 @Resolver(() => User)
 export class UserResolver {
-    constructor(private readonly prisma: PrismaService) {
+    constructor(private readonly prisma: PrismaService, private readonly passwordService: PasswordService) {
     }
 
     // Query Function
@@ -31,13 +33,17 @@ export class UserResolver {
         @Args("firstname") firstname: string,
         @Args("email") email: string,
         @Args("password") password: string,
+        @Args("role", {defaultValue: "USER"}) role: Role,
     ): Promise<User> {
+        const hashedPassword = await this.passwordService.hashPassword(password);
+
         return this.prisma.user.create({
             data: {
                 lastname,
                 firstname,
                 email,
-                password,
+                password: hashedPassword,
+                role,
             },
         });
     }
@@ -49,7 +55,10 @@ export class UserResolver {
         @Args("firstname") firstname: string,
         @Args("email") email: string,
         @Args("password") password: string,
+        @Args("role", {defaultValue: "USER"}) role: Role,
     ): Promise<User> {
+        const hashedPassword = await this.passwordService.hashPassword(password);
+
         return this.prisma.user.update({
             where: {
                 id,
@@ -58,7 +67,8 @@ export class UserResolver {
                 lastname,
                 firstname,
                 email,
-                password,
+                password: hashedPassword,
+                role,
             },
         });
     }
