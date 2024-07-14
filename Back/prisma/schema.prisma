@@ -9,11 +9,13 @@ generator client {
 }
 
 model User {
-  id      Int    @id @default(autoincrement())
-  name    String
-  email   String @unique
-  Group   Group? @relation(fields: [groupId], references: [id])
-  groupId Int?
+  id        Int    @id @default(autoincrement())
+  lastname  String
+  firstname String
+  email     String @unique
+  password  String
+  Group     Group? @relation(fields: [groupId], references: [id])
+  groupId   Int?
 }
 
 model Group {

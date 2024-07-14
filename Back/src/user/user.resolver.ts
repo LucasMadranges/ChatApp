@@ -27,13 +27,17 @@ export class UserResolver {
     // Mutation Function
     @Mutation(() => User)
     async createUser(
-        @Args("name") name: string,
+        @Args("lastname") lastname: string,
+        @Args("firstname") firstname: string,
         @Args("email") email: string,
+        @Args("password") password: string,
     ): Promise<User> {
         return this.prisma.user.create({
             data: {
-                name,
+                lastname,
+                firstname,
                 email,
+                password,
             },
         });
     }
@@ -41,16 +45,20 @@ export class UserResolver {
     @Mutation(() => User)
     async updateUser(
         @Args("id") id: number,
-        @Args("name") name: string,
+        @Args("lastname") lastname: string,
+        @Args("firstname") firstname: string,
         @Args("email") email: string,
+        @Args("password") password: string,
     ): Promise<User> {
         return this.prisma.user.update({
             where: {
                 id,
             },
             data: {
-                name,
+                lastname,
+                firstname,
                 email,
+                password,
             },
         });
     }
