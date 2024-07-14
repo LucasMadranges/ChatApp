@@ -7,7 +7,7 @@ export default function UserCard({user}: {
 }) {
     return (
         <Link href={`/chats/${user.id}`}
-              className="border border-gray-300 p-2 rounded-lg flex flex-col items-center justify-center gap-4 h-52 transition hover:bg-gray-100">
+              className="border border-gray-300 p-2 rounded-lg flex flex-col items-center justify-center gap-4 h-52 transition hover:lg:bg-gray-100">
             <Image src={UserProfile}
                    alt="Image utilisateur"
                    width={512}
