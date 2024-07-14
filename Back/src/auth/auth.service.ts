@@ -1,7 +1,7 @@
 // user.service.ts
 import {Injectable} from "@nestjs/common";
 import {PrismaService} from "../../prisma/prisma.service";
-import {User} from "@prisma/client";
+import {Role, User} from "@prisma/client";
 import {PasswordService} from "../password/password.service";
 import {UserService} from "../user/user.service";
 
@@ -28,5 +28,9 @@ export class AuthService {
                 return user;
             }
         }
+    }
+
+    async registerUser(lastname: string, firstname: string, email: string, password: string, role: Role = "USER"): Promise<User> {
+        return this.userService.createUser(lastname, firstname, email, password, role);
     }
 }
