@@ -18,12 +18,12 @@ export class AuthService {
         const user = await this.userService.getUserByEmail(email);
 
         if (!user) {
-            throw new Error("L'email est incorrect");
+            throw new Error("L'email ou le mot de passe sont incorrect");
         } else {
             const isCorrectPassword = await this.passwordService.comparePasswords(password, user.password);
 
             if (!isCorrectPassword) {
-                throw new Error("Le mot de passe est incorrect");
+                throw new Error("L'email ou le mot de passe sont incorrect");
             } else {
                 return user;
             }
