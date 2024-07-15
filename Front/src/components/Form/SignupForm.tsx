@@ -36,7 +36,7 @@ export default function SignupForm() {
                 <InputField labelText="Confirmation de mot de passe"
                             inputPlaceholder="Confirmer le mot de passe"
                             type="password"
-                            name="password"/>
+                            name="confirm-password"/>
             </div>
             <SubmitBtn>
                 S&apos;inscrire

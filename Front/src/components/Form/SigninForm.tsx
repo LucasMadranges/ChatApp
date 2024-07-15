@@ -1,10 +1,13 @@
+"use client";
 import InputField from "@/components/Form/InputField";
 import SubmitBtn from "@/components/Form/SubmitBtn";
 import Link from "next/link";
 
 export default function SigninForm() {
     return (
-        <form className="overflow-auto sm:rounded-xl bg-gray-200 p-4 h-full sm:h-fit w-full sm:w-fit sm:m-auto flex flex-col gap-8 items-center justify-center">
+        <form method="post"
+              action="/api/auth/callback/credentials"
+              className="overflow-auto sm:rounded-xl bg-gray-200 p-4 h-full sm:h-fit w-full sm:w-fit sm:m-auto flex flex-col gap-8 items-center justify-center">
             <h1 className="text-4xl">Se connecter</h1>
             <div className="flex flex-col gap-4 items-center w-full">
                 <div className="flex flex-col gap-1 w-full">
@@ -19,10 +22,12 @@ export default function SigninForm() {
                                 type="password"
                                 name="password"/>
                 </div>
-                <InputField labelText="Confirmation de mot de passe"
-                            inputPlaceholder="Confirmer le mot de passe"
-                            type="password"
-                            name="password"/>
+                <div className="flex flex-col gap-1 w-full">
+                    <InputField labelText="Confirmation de mot de passe"
+                                inputPlaceholder="Confirmer le mot de passe"
+                                type="password"
+                                name="confirm-password"/>
+                </div>
             </div>
             <SubmitBtn>
                 Se connecter
