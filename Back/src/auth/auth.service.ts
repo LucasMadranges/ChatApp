@@ -31,6 +31,17 @@ export class AuthService {
     }
 
     async registerUser(lastname: string, firstname: string, email: string, password: string, role: Role = "USER"): Promise<User> {
-        return this.userService.createUser(lastname, firstname, email, password, role);
+        const newEmail = email.toLowerCase();
+        const user = await this.userService.getUserByEmail(newEmail);
+
+        if (!user) {
+            const newLastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
+            const newFirstname = firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
+
+            return this.userService.createUser(newLastname, newFirstname, newEmail, password, role);
+        } else {
+            throw new Error("L'email existe déjà");
+        }
+
     }
 }
