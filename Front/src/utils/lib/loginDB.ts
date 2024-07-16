@@ -8,8 +8,11 @@ export async function LoginDB(email: string, password: string, confirmPassword: 
             variables: {email, password},
         });
 
-        console.log("User data:", data);
-        return data;
+        return {
+            firstname: data.loginUser.firstname,
+            lastname: data.loginUser.lastname,
+            email: data.loginUser.email,
+        };
     } catch (error: any) {
         throw new Error(error);
     }
