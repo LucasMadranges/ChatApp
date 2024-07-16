@@ -14,6 +14,7 @@ export async function LoginDB(email: string, password: string, confirmPassword: 
             email: data.loginUser.email,
         };
     } catch (error: any) {
-        throw new Error(error);
+        const errorMessage = error.message.replace("Error: ApolloError: ", "");
+        throw new Error(errorMessage);
     }
 }
