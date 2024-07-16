@@ -14,10 +14,9 @@ const handler = NextAuth({
             async authorize(credentials, req) {
                 if (credentials?.email || credentials?.password || credentials?.confirmPassword) {
                     try {
-                        return LoginDB(credentials.email, credentials.password, credentials.confirmPassword);
-                    } catch (error) {
-                        console.log(error);
-                        return null;
+                        return await LoginDB(credentials.email, credentials.password, credentials.confirmPassword);
+                    } catch (error: any) {
+                        throw new Error(error);
                     }
                 }
             },

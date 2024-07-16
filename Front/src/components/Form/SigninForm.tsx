@@ -4,28 +4,34 @@ import SubmitBtn from "@/components/Form/SubmitBtn";
 import Link from "next/link";
 import {useState} from "react";
 import {signIn} from "next-auth/react";
-import {useSearchParams} from "next/navigation";
+import {useRouter} from "next/navigation";
 
 export default function SigninForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
+    const router = useRouter();
 
-    const error = useSearchParams().get("error");
-
-    async function submitFormSignin(event: any) {
+    async function handleFormSignin(event: any) {
         event.preventDefault();
-        await signIn("credentials", {
+        const result: any = await signIn("credentials", {
+            redirect: false,
             email: email,
             password: password,
             confirmPassword: confirmPassword,
-            redirect: true,
             callbackUrl: `${process.env.NEXTAUTH_URL}/chats`,
         });
+
+        if (result.error) {
+            setErrorMsg(result.error);
+        } else {
+            router.push("/chats");
+        }
     }
 
     return (
-        <form onSubmit={submitFormSignin}
+        <form onSubmit={handleFormSignin}
               className="overflow-auto sm:rounded-xl bg-gray-200 p-4 h-full sm:h-fit w-full sm:w-[500px] sm:m-auto flex flex-col gap-8 items-center justify-center">
             <h1 className="text-4xl">Se connecter</h1>
             <div className="flex flex-col gap-4 items-center w-full">
@@ -51,9 +57,11 @@ export default function SigninForm() {
                                 onChange={(e: any) => setConfirmPassword(e.target.value)}/>
                 </div>
             </div>
-            {error === "SessionRequired" && <div className="text-red-600 p-2 bg-red-100 rounded-md">
-                La connexion est requise pour accéder à cette page
-            </div>}
+            {errorMsg !== "" &&
+                <div className="text-red-600 p-2 bg-red-100 rounded-md">
+                    {errorMsg}
+                </div>
+            }
             <SubmitBtn>
                 Se connecter
             </SubmitBtn>
