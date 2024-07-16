@@ -22,30 +22,29 @@ const handler = NextAuth({
             },
         }),
     ],
+    callbacks: {
+        async jwt({token, user}: any) {
+            if (user) {
+                token.firstname = user.firstname;
+                token.lastname = user.lastname;
+                token.email = user.email;
+                token.role = user.role;
+            }
+            return token;
+        },
+        async session({session, token}: any) {
+            session.user.firstname = token.firstname;
+            session.user.lastname = token.lastname;
+            session.user.email = token.email;
+            session.user.role = token.role;
+
+            return session;
+        },
+    },
+    secret: process.env.NEXTAUTH_SECRET,
     pages: {
         signIn: "/auth/signin",
-        newUser: "/chats",
     },
 });
 
 export {handler as GET, handler as POST};
-
-/*
-*                 const query = `{
-                loginUser(email: "theotime@theotime.fr", password: "theotimetheotime") {
-                        firstname
-                        lastname
-                        email
-                    }
-                }`;
-                const options = {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({query}),
-                };
-
-                const request = new Request("http://localhost:4000/graphql", options);
-                console.log(request);
-* */

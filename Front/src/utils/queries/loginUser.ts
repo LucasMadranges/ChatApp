@@ -6,6 +6,7 @@ export const LOGIN_USER = gql`
             firstname
             lastname
             email
+            role
         }
     }
 `;
