@@ -20,8 +20,9 @@ export class AuthResolver {
     async loginUser(
         @Args("email") email: string,
         @Args("password") password: string,
+        @Args("confirmPassword") confirmPassword: string,
     ): Promise<User> {
-        return this.authService.loginUser(email, password);
+        return this.authService.loginUser(email, password, confirmPassword);
     }
 
     @Mutation(() => User)

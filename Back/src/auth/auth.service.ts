@@ -14,19 +14,23 @@ export class AuthService {
     ) {
     }
 
-    async loginUser(email: string, password: string): Promise<User> {
+    async loginUser(email: string, password: string, confirmPassword: string): Promise<User> {
         const newEmail = email.toLowerCase();
         const user = await this.userService.getUserByEmail(newEmail);
 
         if (!user) {
             throw new Error("L'email ou le mot de passe sont incorrect");
         } else {
-            const isCorrectPassword = await this.passwordService.comparePasswords(password, user.password);
-
-            if (!isCorrectPassword) {
-                throw new Error("L'email ou le mot de passe sont incorrect");
+            if (password !== confirmPassword) {
+                throw new Error("Les mots de passe ne correspondent pas");
             } else {
-                return user;
+                const isCorrectPassword = await this.passwordService.comparePasswords(password, user.password);
+
+                if (!isCorrectPassword) {
+                    throw new Error("L'email ou le mot de passe sont incorrect");
+                } else {
+                    return user;
+                }
             }
         }
     }
