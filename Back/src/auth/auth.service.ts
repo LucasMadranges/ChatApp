@@ -15,7 +15,8 @@ export class AuthService {
     }
 
     async loginUser(email: string, password: string): Promise<User> {
-        const user = await this.userService.getUserByEmail(email);
+        const newEmail = email.toLowerCase();
+        const user = await this.userService.getUserByEmail(newEmail);
 
         if (!user) {
             throw new Error("L'email ou le mot de passe sont incorrect");
