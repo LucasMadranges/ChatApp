@@ -5,7 +5,7 @@ export async function LoginDB(email: string, password: string, confirmPassword: 
     try {
         const {data} = await client.query({
             query: LOGIN_USER,
-            variables: {email, password},
+            variables: {email, password, confirmPassword},
         });
 
         return {

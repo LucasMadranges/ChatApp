@@ -1,9 +1,9 @@
 "use client";
 import ListChats from "@/components/ListChats/ListChats";
-import {useSessionClient} from "@/utils/hooks/useSessionClient";
+import {useSession} from "next-auth/react";
 
 export default function Page() {
-    const {session, status} = useSessionClient({
+    const {data: session} = useSession({
         required: true,
     });
 

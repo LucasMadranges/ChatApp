@@ -1,9 +1,9 @@
 "use client";
 import UsersList from "@/components/UserList/UsersList";
-import {useSessionClient} from "@/utils/hooks/useSessionClient";
+import {useSession} from "next-auth/react";
 
 export default function Page() {
-    const {session, status} = useSessionClient({
+    const {data: session} = useSession({
         required: true,
     });
 
