@@ -11,6 +11,8 @@ services:
     depends_on:
       - nestjs-api
       - postgres-db
+    networks:
+      - app-network
 
   nestjs-api:
     image: node:22
@@ -25,6 +27,8 @@ services:
       - postgres-db
     environment:
       DATABASE_URL: "postgresql://user:password@postgres-db:5432/chat-app-db"
+    networks:
+      - app-network
 
   postgres-db:
     image: postgres:13
@@ -37,6 +41,12 @@ services:
       - postgres-data:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+    networks:
+      - app-network
 
 volumes:
   postgres-data:
+
+networks:
+  app-network:
+    driver: bridge
