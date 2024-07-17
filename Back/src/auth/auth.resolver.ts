@@ -31,8 +31,9 @@ export class AuthResolver {
         @Args("firstname") firstname: string,
         @Args("email") email: string,
         @Args("password") password: string,
+        @Args("confirmPassword") confirmPassword: string,
         @Args("role", {defaultValue: "USER"}) role: Role,
     ): Promise<User> {
-        return this.authService.registerUser(lastname, firstname, email, password, role);
+        return this.authService.registerUser(lastname, firstname, email, password, confirmPassword, role);
     }
 }

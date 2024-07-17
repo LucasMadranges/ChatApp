@@ -42,7 +42,7 @@ export class AuthService {
         }
     }
 
-    async registerUser(lastname: string, firstname: string, email: string, password: string, role: Role = "USER"): Promise<User> {
+    async registerUser(lastname: string, firstname: string, email: string, password: string, confirmPassword: string, role: Role = "USER"): Promise<User> {
         const newEmail = email.toLowerCase();
         const newLastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
         const newFirstname = firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
@@ -55,7 +55,11 @@ export class AuthService {
             if (!validatePassword) {
                 throw new Error("Le mot de passe ne correspond pas. Il doit contenir au minimum : 12 caractères, 1 lettre minuscule, 1 lettre majuscule, 1 chiffre et 1 symbole");
             } else {
-                return this.userService.createUser(newLastname, newFirstname, newEmail, password, role);
+                if (password !== confirmPassword) {
+                    throw new Error("Les mots de passe ne correspondent pas");
+                } else {
+                    return this.userService.createUser(newLastname, newFirstname, newEmail, password, role);
+                }
             }
         } else {
             throw new Error("Cette email est déjà utilisé");
