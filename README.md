@@ -18,6 +18,11 @@ Inspired by this app : <a href="https://dribbble.com/shots/24323558-Chat-App-Das
 - Prisma
 - GraphQL
 
+## Tools :
+
+- Docker
+- Typescript
+
 ## For running the project
 
 Use the command line :
