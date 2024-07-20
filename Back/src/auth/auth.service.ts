@@ -43,32 +43,30 @@ export class AuthService {
     }
 
     async registerUser(lastname: string, firstname: string, email: string, password: string, confirmPassword: string, role: Role = "USER"): Promise<User> {
-        const newEmail = email.toLowerCase();
-        const newLastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
-        const newFirstname = firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
-
-        console.log(lastname);
-        console.log(firstname);
-        console.log(email);
-        console.log(password);
-        console.log(confirmPassword);
-
-        const user = await this.userService.getUserByEmail(newEmail);
-
-        if (!user) {
-            const validatePassword = password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{12,})/);
-
-            if (!validatePassword) {
-                throw new Error("Le mot de passe ne correspond pas. Il doit contenir au minimum : 12 caractères, 1 lettre minuscule, 1 lettre majuscule, 1 chiffre et 1 symbole");
-            } else {
-                if (password !== confirmPassword) {
-                    throw new Error("Les mots de passe ne correspondent pas");
-                } else {
-                    return this.userService.createUser(newLastname, newFirstname, newEmail, password, role);
-                }
-            }
+        if (!lastname || !firstname || !email || !password || !confirmPassword) {
+            throw new Error("Les champs nom, prénom, email, mot de passe et confirmation de mot de passe sont obligatoires");
         } else {
-            throw new Error("Cette email est déjà utilisé");
+            const newEmail = email.toLowerCase();
+            const newLastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
+            const newFirstname = firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
+
+            const user = await this.userService.getUserByEmail(newEmail);
+
+            if (!user) {
+                const validatePassword = password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{12,})/);
+
+                if (!validatePassword) {
+                    throw new Error("Le mot de passe ne correspond pas. Il doit contenir au minimum : 12 caractères, 1 lettre minuscule, 1 lettre majuscule, 1 chiffre et 1 symbole");
+                } else {
+                    if (password !== confirmPassword) {
+                        throw new Error("Les mots de passe ne correspondent pas");
+                    } else {
+                        return this.userService.createUser(newLastname, newFirstname, newEmail, password, role);
+                    }
+                }
+            } else {
+                throw new Error("Cette email est déjà utilisé");
+            }
         }
     }
 }
