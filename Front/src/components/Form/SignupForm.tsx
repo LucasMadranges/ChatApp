@@ -1,10 +1,35 @@
+"use client";
 import InputField from "@/components/Form/InputField";
 import SubmitBtn from "@/components/Form/SubmitBtn";
 import Link from "next/link";
+import {useState} from "react";
+import {useRouter} from "next/navigation";
+import {registerDB} from "@/utils/lib/registerDB";
 
 export default function SignupForm() {
+    const [lastname, setLastname] = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
+    const router = useRouter();
+
+    async function handleFormSignup(event: any) {
+        event.preventDefault();
+        const result: any = await registerDB(lastname, firstname, email, password, confirmPassword);
+        console.log(result);
+
+        if (result.error) {
+            setErrorMsg(result.error);
+        } else {
+            router.push("/auth/signin");
+        }
+    }
+
     return (
-        <form className="overflow-auto sm:rounded-xl bg-gray-200 p-4 h-full sm:h-fit w-full sm:w-fit sm:m-auto flex flex-col gap-8 items-center">
+        <form onSubmit={handleFormSignup}
+              className="overflow-auto sm:rounded-xl bg-gray-200 p-4 sm:w-[500px] w-full sm:m-auto flex flex-col gap-8 items-center">
             <h1 className="text-4xl">S&apos;inscrire</h1>
             <div className="flex flex-col gap-4 items-center w-full">
                 <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
@@ -12,32 +37,42 @@ export default function SignupForm() {
                         <InputField labelText="Nom"
                                     inputPlaceholder="Nom"
                                     type="text"
-                                    name="lastname"/>
+                                    name="lastname"
+                                    onChange={(e: any) => setLastname(e.target.value)}/>
                     </div>
                     <div className="flex flex-col gap-1 w-full">
                         <InputField labelText="Prénom"
                                     inputPlaceholder="Prénom"
                                     type="text"
-                                    name="firstname"/>
+                                    name="firstname"
+                                    onChange={(e: any) => setFirstname(e.target.value)}/>
                     </div>
                 </div>
                 <div className="flex flex-col gap-1 w-full">
                     <InputField labelText="Email"
                                 inputPlaceholder="Email"
                                 type="email"
-                                name="email"/>
+                                name="email"
+                                onChange={(e: any) => setEmail(e.target.value)}/>
                 </div>
                 <div className="flex flex-col gap-1 w-full">
                     <InputField labelText="Mot de passe"
                                 inputPlaceholder="Mot de passe"
                                 type="password"
-                                name="password"/>
+                                name="password"
+                                onChange={(e: any) => setPassword(e.target.value)}/>
                 </div>
                 <InputField labelText="Confirmation de mot de passe"
                             inputPlaceholder="Confirmer le mot de passe"
                             type="password"
-                            name="confirm-password"/>
+                            name="confirm-password"
+                            onChange={(e: any) => setConfirmPassword(e.target.value)}/>
             </div>
+            {errorMsg !== "" &&
+                <div className="text-red-600 p-2 bg-red-100 rounded-md">
+                    {errorMsg}
+                </div>
+            }
             <SubmitBtn>
                 S&apos;inscrire
             </SubmitBtn>

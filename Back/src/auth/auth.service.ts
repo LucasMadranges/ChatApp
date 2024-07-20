@@ -47,10 +47,16 @@ export class AuthService {
         const newLastname = lastname.charAt(0).toUpperCase() + lastname.slice(1).toLowerCase();
         const newFirstname = firstname.charAt(0).toUpperCase() + firstname.slice(1).toLowerCase();
 
+        console.log(lastname);
+        console.log(firstname);
+        console.log(email);
+        console.log(password);
+        console.log(confirmPassword);
+
         const user = await this.userService.getUserByEmail(newEmail);
 
         if (!user) {
-            const validatePassword = password.match(/^(?=.*\d)(?=.*[!@#$%§£=+/.;,?^&*_-])(?=.*[a-z])(?=.*[A-Z]).{12,}$/);
+            const validatePassword = password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{12,})/);
 
             if (!validatePassword) {
                 throw new Error("Le mot de passe ne correspond pas. Il doit contenir au minimum : 12 caractères, 1 lettre minuscule, 1 lettre majuscule, 1 chiffre et 1 symbole");
@@ -64,6 +70,5 @@ export class AuthService {
         } else {
             throw new Error("Cette email est déjà utilisé");
         }
-
     }
 }
