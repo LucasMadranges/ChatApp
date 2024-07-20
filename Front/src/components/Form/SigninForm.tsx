@@ -24,7 +24,13 @@ export default function SigninForm() {
         });
 
         if (result.error) {
-            setErrorMsg(result.error);
+            setErrorMsg(() => {
+                if (result.error === "CredentialsSignin") {
+                    return "Error: Les champs email, mot de passe et confirmation de mot de passe sont requis";
+                } else {
+                    return result.error;
+                }
+            });
         } else {
             router.push("/chats");
         }
