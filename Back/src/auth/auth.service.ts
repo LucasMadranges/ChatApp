@@ -57,7 +57,7 @@ export class AuthService {
             const user = await this.userService.getUserByEmail(newEmail);
 
             if (!user) {
-                const validatePassword = password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{12,})/);
+                const validatePassword = password.match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[-!@#$%^&*?/;,=+_])(?=.{12,})/);
 
                 if (!validatePassword) {
                     throw new Error("Le mot de passe ne correspond pas. Il doit contenir au minimum : 12 caractères, 1 lettre minuscule, 1 lettre majuscule, 1 chiffre et 1 symbole");

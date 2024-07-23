@@ -7,7 +7,6 @@ import {useSession} from "next-auth/react";
 
 export default function TopMenu() {
     const {data: session} = useSession();
-    console.log(session);
 
     return (
         <div className="flex flex-col gap-4">
