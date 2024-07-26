@@ -1,4 +1,7 @@
+"use client";
 import UserCard from "@/components/UserList/UserCard";
+import {useEffect, useState} from "react";
+import {fetchUsersDB} from "@/utils/lib/fetchUsers";
 
 export default function UsersList() {
     const objUser = {
@@ -6,6 +9,12 @@ export default function UsersList() {
         firstName: "Prénom",
         lastName: "Nom",
     };
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const data = fetchUsersDB();
+        console.log(data);
+    }, []);
 
     const arrUser = Array.from({length: 25}, () => objUser);
 

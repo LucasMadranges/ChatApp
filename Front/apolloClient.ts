@@ -1,16 +1,18 @@
 import {ApolloClient, ApolloLink, HttpLink, InMemoryCache} from "@apollo/client";
 
-// Custom link to dynamically set the URI
+const httpLink = new HttpLink({
+    uri: process.env.NEXT_PUBLIC_GRAPHQL_URL, // Assurez-vous que cette variable d'environnement est correcte
+    credentials: "include",
+});
+
 const customLink = new ApolloLink((operation, forward) => {
-    const uri = "http://nestjs-api:4000";
-
-    const httpLink = new HttpLink({uri, credentials: "include"});
-
-    return httpLink.request(operation, forward);
+    return forward(operation).map((response) => {
+        return response;
+    });
 });
 
 const client = new ApolloClient({
-    link: customLink,
+    link: ApolloLink.from([customLink, httpLink]),
     cache: new InMemoryCache(),
 });
 

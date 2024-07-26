@@ -8,6 +8,8 @@ export async function LoginDB(email: string, password: string, confirmPassword: 
             variables: {email, password, confirmPassword},
         });
 
+        console.log(data);
+
         return {
             firstname: data.loginUser.firstname,
             lastname: data.loginUser.lastname,

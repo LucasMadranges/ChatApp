@@ -21,7 +21,7 @@ export default function TopMenu() {
                        width={512}
                        height={512}
                        className="rounded-full h-8 w-8 lg:w-12 lg:h-12 object-cover"/>
-                <span className="hidden lg:inline-block text-white text-sm">{session?.user.firstname} {session?.user.lastname}</span>
+                <span className="hidden lg:inline-block text-white text-sm">Lucas Madranges</span>
             </div>
         </div>
     );

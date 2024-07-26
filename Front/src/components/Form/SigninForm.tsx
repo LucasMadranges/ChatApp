@@ -20,8 +20,10 @@ export default function SigninForm() {
             email: email,
             password: password,
             confirmPassword: confirmPassword,
-            callbackUrl: `${process.env.NEXTAUTH_URL}/chats`,
+            callbackUrl: `http://localhost:3000/chats`,
         });
+
+        console.log(result);
 
         if (result.error) {
             setErrorMsg(() => {

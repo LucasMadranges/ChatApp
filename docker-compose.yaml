@@ -11,6 +11,8 @@ services:
     depends_on:
       - nestjs-api
       - postgres-db
+    env_file:
+      - .env
     networks:
       - networkChatApp
 

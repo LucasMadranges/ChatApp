@@ -33,11 +33,12 @@ const handler = NextAuth({
             return token;
         },
         async session({session, token}: any) {
-            session.user.firstname = token.firstname;
-            session.user.lastname = token.lastname;
-            session.user.email = token.email;
-            session.user.role = token.role;
-
+            if (token) {
+                session.user.firstname = token.firstname;
+                session.user.lastname = token.lastname;
+                session.user.email = token.email;
+                session.user.role = token.role;
+            }
             return session;
         },
     },
