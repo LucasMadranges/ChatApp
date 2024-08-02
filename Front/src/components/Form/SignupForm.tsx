@@ -18,7 +18,6 @@ export default function SignupForm() {
     async function handleFormSignup(event: any) {
         event.preventDefault();
         const result: any = await registerDB(lastname, firstname, email, password, confirmPassword);
-        console.log(result);
 
         if (result.error) {
             setErrorMsg(result.error);

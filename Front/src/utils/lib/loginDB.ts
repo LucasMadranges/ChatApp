@@ -1,14 +1,13 @@
 import client from "@/../apolloClient";
 import {LOGIN_USER} from "../queries/loginUser";
+import {User} from "@/utils/models/User";
 
-export async function LoginDB(email: string, password: string, confirmPassword: string) {
+export async function LoginDB(email: string, password: string, confirmPassword: string): Promise<User> {
     try {
         const {data} = await client.query({
             query: LOGIN_USER,
             variables: {email, password, confirmPassword},
         });
-
-        console.log(data);
 
         return {
             firstname: data.loginUser.firstname,

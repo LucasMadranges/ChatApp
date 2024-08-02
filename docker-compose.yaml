@@ -27,18 +27,16 @@ services:
     command: sh -c "npm install && npm run start:dev"
     depends_on:
       - postgres-db
-    environment:
-      DATABASE_URL: "postgresql://user:password@postgres-db:5432/chat-app-db"
+    env_file:
+      - .env
     networks:
       - networkChatApp
 
   postgres-db:
     image: postgres:13
     container_name: postgres-db
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: chat-app-db
+    env_file:
+      - .env
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:

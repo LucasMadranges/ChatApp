@@ -23,16 +23,8 @@ export default function SigninForm() {
             callbackUrl: `http://localhost:3000/chats`,
         });
 
-        console.log(result);
-
         if (result.error) {
-            setErrorMsg(() => {
-                if (result.error === "CredentialsSignin") {
-                    return "Error: Les champs email, mot de passe et confirmation de mot de passe sont requis";
-                } else {
-                    return result.error;
-                }
-            });
+            setErrorMsg(result.error);
         } else {
             router.push("/chats");
         }
