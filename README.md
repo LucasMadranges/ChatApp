@@ -26,3 +26,5 @@ Inspired by this app : <a href="https://dribbble.com/shots/24323558-Chat-App-Das
 
 Use the command line :
 ```docker-compose up --build```
+
+(README not finished yet)
