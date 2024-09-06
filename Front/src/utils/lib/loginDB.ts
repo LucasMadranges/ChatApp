@@ -1,8 +1,9 @@
 import client from "@/../apolloClient";
 import {LOGIN_USER} from "../queries/loginUser";
-import {User} from "@/utils/models/User";
+import {Error} from "@/utils/models/Error";
+import {Auth} from "@/utils/models/Auth";
 
-export async function LoginDB(email: string, password: string, confirmPassword: string): Promise<User> {
+export async function LoginDB(email: string, password: string, confirmPassword: string): Promise<Auth | Error> {
     try {
         const {data} = await client.query({
             query: LOGIN_USER,
@@ -10,13 +11,13 @@ export async function LoginDB(email: string, password: string, confirmPassword: 
         });
 
         return {
-            firstname: data.loginUser.firstname,
-            lastname: data.loginUser.lastname,
-            email: data.loginUser.email,
-            role: data.loginUser.role,
+            user: data.loginUser.user,
+            token: data.loginUser.token,
         };
     } catch (error: any) {
         const errorMessage = error.message.replace("Error: ApolloError: ", "");
-        throw new Error(errorMessage);
+        return {
+            message: errorMessage,
+        };
     }
 }

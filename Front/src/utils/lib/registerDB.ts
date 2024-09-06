@@ -9,6 +9,7 @@ export async function registerDB(lastname: string, firstname: string, email: str
             mutation: REGISTER_USER,
             variables: {lastname, firstname, email, password, confirmPassword},
         });
+
         return {
             firstname: data.registerUser.firstname,
             lastname: data.registerUser.lastname,

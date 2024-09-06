@@ -1,15 +1,11 @@
 import {Args, Mutation, Query, Resolver} from "@nestjs/graphql";
 import {User} from "./user.model";
-import {PrismaService} from "../../prisma/prisma.service";
 import {Role} from "@prisma/client";
-import {PasswordService} from "../password/password.service";
 import {UserService} from "./user.service";
 
 @Resolver(() => User)
 export class UserResolver {
     constructor(
-        private readonly prisma: PrismaService,
-        private readonly passwordService: PasswordService,
         private readonly userService: UserService,
     ) {
     }

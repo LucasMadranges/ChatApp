@@ -3,8 +3,8 @@ import InputField from "@/components/Form/InputField";
 import SubmitBtn from "@/components/Form/SubmitBtn";
 import Link from "next/link";
 import {useState} from "react";
-import {signIn} from "next-auth/react";
 import {useRouter} from "next/navigation";
+import {LoginDB} from "@/utils/lib/loginDB";
 
 export default function SigninForm() {
     const [email, setEmail] = useState("");
@@ -15,16 +15,10 @@ export default function SigninForm() {
 
     async function handleFormSignin(event: any) {
         event.preventDefault();
-        const result: any = await signIn("credentials", {
-            redirect: false,
-            email: email,
-            password: password,
-            confirmPassword: confirmPassword,
-            callbackUrl: `http://localhost:3000/chats`,
-        });
+        const result: any = await LoginDB(email, password, confirmPassword);
 
-        if (result.error) {
-            setErrorMsg(result.error);
+        if (result.message) {
+            setErrorMsg(result.message);
         } else {
             router.push("/chats");
         }

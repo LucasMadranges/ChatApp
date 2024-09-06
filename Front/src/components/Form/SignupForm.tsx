@@ -19,8 +19,8 @@ export default function SignupForm() {
         event.preventDefault();
         const result: any = await registerDB(lastname, firstname, email, password, confirmPassword);
 
-        if (result.error) {
-            setErrorMsg(result.error);
+        if (result.message) {
+            setErrorMsg(result.message);
         } else {
             router.push("/auth/signin");
         }
