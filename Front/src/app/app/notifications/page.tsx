@@ -1,7 +1,9 @@
+import ListNotifications from "@/components/Notifications/ListNotifications";
+
 export default async function Page() {
     return (
         <>
-            <h1>Notifications</h1>
+            <ListNotifications/>
         </>
     );
 }

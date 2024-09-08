@@ -1,9 +1,9 @@
-import UsersList from "@/components/UserList/UsersList";
+import FriendsList from "@/components/FriendsList/FriendsList";
 
 export default async function Page() {
     return (
         <>
-            <UsersList/>
+            <FriendsList/>
         </>
     );
 }
