@@ -1,10 +1,8 @@
-"use client";
-import Cookies from "js-cookie";
-import {useRouter} from "next/navigation";
+"use server";
+import {cookies} from "next/headers";
 
-export function useSession() {
-    const router = useRouter();
-    const token = Cookies.get("token");
+export async function useSession() {
+    const token = cookies().get("token")?.value;
 
     if (token) {
         const base64Url = token.split(".")[1];

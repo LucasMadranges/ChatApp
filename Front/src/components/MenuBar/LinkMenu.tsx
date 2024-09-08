@@ -4,6 +4,7 @@ import Link from "next/link";
 import {PeoplesIcon} from "@/components/Icons/PeoplesIcon";
 import {AddChatIcon} from "@/components/Icons/AddChatIcon";
 import {usePathname} from "next/navigation";
+import {SearchIcon} from "@/components/Icons/SearchIcon";
 
 export default function LinkMenu() {
     const pathname = usePathname();
@@ -17,11 +18,18 @@ export default function LinkMenu() {
                                color="white"/>,
         },
         {
-            path: "/users",
-            text: "Liste des utilisateurs",
+            path: "/friends",
+            text: "Amis",
             icon: <PeoplesIcon width="32px"
                                height="32px"
                                color="white"/>,
+        },
+        {
+            path: "/search",
+            text: "Recherche",
+            icon: <SearchIcon width="32px"
+                              height="32px"
+                              color="white"/>,
         },
     ];
 

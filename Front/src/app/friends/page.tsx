@@ -1,6 +1,6 @@
+import UsersList from "@/components/UserList/UsersList";
 import {useSession} from "@/utils/hooks/useSession";
 import {redirect} from "next/navigation";
-import ListChats from "@/components/ListChats/ListChats";
 
 export default async function Page() {
     const result = await useSession();
@@ -8,7 +8,7 @@ export default async function Page() {
     if (result.ok) {
         return (
             <>
-                <ListChats/>
+                <UsersList/>
             </>
         );
     } else {

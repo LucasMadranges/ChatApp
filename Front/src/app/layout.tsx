@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     description: "Created by Lucas Madranges",
 };
 
-export default function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {
+export default async function RootLayout({children}: Readonly<{ children: React.ReactNode; }>) {
     return (
         <html lang="fr">
-            <body className={`${inter.className}`}>
-                <main className="flex overflow-hidden h-svh">
+            <body className={`${inter.className} flex`}>
+                <main className="flex overflow-hidden h-svh w-full">
                     {children}
                 </main>
             </body>

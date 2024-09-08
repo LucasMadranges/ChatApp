@@ -1,12 +1,17 @@
-"use client";
+import {useSession} from "@/utils/hooks/useSession";
+import {redirect} from "next/navigation";
 import Chat from "@/components/Chat/Chat";
 
-export default function Page({params}: { params: any }) {
-    console.log(params);
+export default async function Page() {
+    const result = await useSession();
 
-    return (
-        <>
-            <Chat/>
-        </>
-    );
+    if (result.ok) {
+        return (
+            <>
+                <Chat/>
+            </>
+        );
+    } else {
+        redirect("/auth/signin");
+    }
 }
