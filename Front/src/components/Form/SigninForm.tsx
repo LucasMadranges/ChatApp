@@ -5,6 +5,7 @@ import Link from "next/link";
 import {useState} from "react";
 import {useRouter} from "next/navigation";
 import {LoginDB} from "@/utils/lib/loginDB";
+import Cookies from "js-cookie";
 
 export default function SigninForm() {
     const [email, setEmail] = useState("");
@@ -20,6 +21,7 @@ export default function SigninForm() {
         if (result.message) {
             setErrorMsg(result.message);
         } else {
+            Cookies.set("token", result.token, {expires: 1});
             router.push("/chats");
         }
     }
