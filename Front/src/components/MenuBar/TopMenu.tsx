@@ -1,10 +1,12 @@
-"use client";
 import {ChatAppLogo} from "@/components/Icons/ChatAppLogo";
 import Image from "next/image";
 import ProfilPicture from "../../../public/people/people-1.jpg";
 import Link from "next/link";
+import {useSession} from "@/utils/hooks/useSession";
 
-export default function TopMenu() {
+export default async function TopMenu() {
+    const session = await useSession();
+
     return (
         <div className="flex flex-col gap-4">
             <Link href="/"
@@ -13,12 +15,15 @@ export default function TopMenu() {
                 <span className="hidden lg:inline-block text-white">ChatApp by Lucas M.</span>
             </Link>
             <div className="flex flex-col items-center justify-center">
-                <Image src={ProfilPicture}
-                       alt="Photo de profil"
-                       width={512}
-                       height={512}
-                       className="rounded-full h-8 w-8 lg:w-12 lg:h-12 object-cover"/>
-                <span className="hidden lg:inline-block text-white text-sm">Lul</span>
+                <Link href="/app/profile"
+                      className="hover:opacity-75 transition">
+                    <Image src={ProfilPicture}
+                           alt="Photo de profil"
+                           width={512}
+                           height={512}
+                           className="rounded-full h-8 w-8 lg:w-12 lg:h-12 object-cover"/>
+                </Link>
+                <span className="hidden lg:inline-block text-white text-sm">{session.user.lastname} {session.user.firstname}</span>
             </div>
         </div>
     );

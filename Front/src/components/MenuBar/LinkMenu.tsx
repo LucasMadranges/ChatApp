@@ -5,6 +5,7 @@ import {PeoplesIcon} from "@/components/Icons/PeoplesIcon";
 import {AddChatIcon} from "@/components/Icons/AddChatIcon";
 import {usePathname} from "next/navigation";
 import {SearchIcon} from "@/components/Icons/SearchIcon";
+import {BellIcon} from "@/components/Icons/BellIcon";
 
 export default function LinkMenu() {
     const pathname = usePathname();
@@ -30,6 +31,13 @@ export default function LinkMenu() {
             icon: <SearchIcon width="32px"
                               height="32px"
                               color="white"/>,
+        },
+        {
+            path: "/app/notifications",
+            text: "Notifications",
+            icon: <BellIcon width="32px"
+                            height="32px"
+                            color="white"/>,
         },
     ];
 
