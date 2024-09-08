@@ -11,21 +11,21 @@ export default function LinkMenu() {
 
     const arrLink = [
         {
-            path: "/chats",
+            path: "/app/chats",
             text: "Messages",
             icon: <AddChatIcon width="32px"
                                height="32px"
                                color="white"/>,
         },
         {
-            path: "/friends",
+            path: "/app/friends",
             text: "Amis",
             icon: <PeoplesIcon width="32px"
                                height="32px"
                                color="white"/>,
         },
         {
-            path: "/search",
+            path: "/app/search",
             text: "Recherche",
             icon: <SearchIcon width="32px"
                               height="32px"

@@ -12,7 +12,7 @@ export default function ListUser({user}: {
     }
 }) {
     return (
-        <Link href={`/chats/${user.id}`}
+        <Link href={`/app/chats/${user.id}`}
               className="p-4 border-b border-gray-200 flex items-center justify-between gap-4 transition hover:bg-gray-100">
             <div className="flex items-center justify-start gap-2 min-w-fit">
                 <Image src={PictureReceiver}

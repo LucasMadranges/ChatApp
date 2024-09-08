@@ -1,13 +1,16 @@
+import MenuBar from "@/components/MenuBar/MenuBar";
+import React from "react";
 import {useSession} from "@/utils/hooks/useSession";
 import {redirect} from "next/navigation";
 
-export default async function Page() {
+export default async function UsersLayout({children}: Readonly<{ children: React.ReactNode; }>) {
     const result = await useSession();
 
     if (result.ok) {
         return (
             <>
-                <h1>Recherche d&apos;utilisateurs</h1>
+                <MenuBar/>
+                {children}
             </>
         );
     } else {

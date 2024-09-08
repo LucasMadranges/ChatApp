@@ -22,7 +22,7 @@ export default function SigninForm() {
             setErrorMsg(result.message);
         } else {
             Cookies.set("token", result.token, {expires: 1});
-            router.push("/chats");
+            router.push("/app/chats");
         }
     }
 

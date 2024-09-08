@@ -7,7 +7,7 @@ export default function TopBar() {
     return (
         <div className="px-4 py-2 border-b border-gray-200 h-fit w-full">
             <div className="flex items-center justify-start gap-2">
-                <Link href="/chats"
+                <Link href="/app/chats"
                       className="flex items-center justify-center hover:bg-gray-200 transition p-2 rounded-full">
                     <BackArrowIcon width="24px"
                                    height="24px"
