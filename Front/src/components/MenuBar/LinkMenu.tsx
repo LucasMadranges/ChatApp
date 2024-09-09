@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import {PeoplesIcon} from "@/components/Icons/PeoplesIcon";
-import {AddChatIcon} from "@/components/Icons/AddChatIcon";
 import {usePathname} from "next/navigation";
 import {SearchIcon} from "@/components/Icons/SearchIcon";
 import {BellIcon} from "@/components/Icons/BellIcon";
+import {MessageIcon} from "@/components/Icons/MessageIcon";
 
 export default function LinkMenu() {
     const pathname = usePathname();
@@ -14,7 +14,7 @@ export default function LinkMenu() {
         {
             path: "/app/chats",
             text: "Messages",
-            icon: <AddChatIcon width="32px"
+            icon: <MessageIcon width="32px"
                                height="32px"
                                color="white"/>,
         },

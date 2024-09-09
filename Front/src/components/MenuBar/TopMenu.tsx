@@ -10,7 +10,7 @@ export default async function TopMenu() {
     return (
         <div className="flex flex-col gap-4">
             <Link href="/"
-                  className="flex items-center justify-center gap-4">
+                  className="flex items-center justify-center gap-4 transition hover:opacity-75">
                 <ChatAppLogo className="w-8 h-8"/>
                 <span className="hidden lg:inline-block text-white">ChatApp by Lucas M.</span>
             </Link>

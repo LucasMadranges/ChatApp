@@ -1,13 +1,12 @@
-import Link from "next/link";
 import Image from "next/image";
 import UserProfile from "../../../public/people/people-2.jpg";
+import AddFriendBtn from "@/components/UserList/AddFriendBtn";
 
 export default function UserCard({user}: {
     user: { id: number, lastName: string, firstName: string }
 }) {
     return (
-        <Link href={`/app/chats/${user.id}`}
-              className="border border-gray-300 p-8 rounded-lg flex items-center justify-center gap-4 h-36 transition hover:bg-gray-100">
+        <div className="border border-gray-300 p-8 rounded-lg flex items-center justify-center gap-4 h-36 transition hover:bg-gray-100">
             <Image src={UserProfile}
                    alt="Image utilisateur"
                    width={512}
@@ -19,6 +18,7 @@ export default function UserCard({user}: {
                     elit. Beatae commodi culpa, debitis dolor dolores ea expedita incidunt labore magni molestiae nulla
                     porro qui ratione repudiandae saepe sapiente voluptatem! Laborum, molestiae.</p>
             </div>
-        </Link>
+            <AddFriendBtn/>
+        </div>
     );
 }

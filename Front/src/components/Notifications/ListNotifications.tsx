@@ -3,8 +3,8 @@ import Notification from "@/components/Notifications/Notification";
 export default function ListNotifications() {
     const objNotifications = {
         id: 7657986588965,
-        text: "Vous avez une nouvelle demande d'amis",
-        hour: "08/09/2024 - 09:09",
+        type: "newFriend",
+        date: new Date("2024-09-09T08:40:09.594Z"),
     };
 
     const arrUser = Array.from({length: 24}, () => objNotifications);
