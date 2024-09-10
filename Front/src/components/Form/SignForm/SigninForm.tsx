@@ -1,6 +1,6 @@
 "use client";
-import InputField from "@/components/Form/InputField";
-import SubmitBtn from "@/components/Form/SubmitBtn";
+import InputField from "@/components/Form/SignForm/InputField";
+import SubmitBtn from "@/components/Form/SignForm/SubmitBtn";
 import Link from "next/link";
 import {useState} from "react";
 import {useRouter} from "next/navigation";

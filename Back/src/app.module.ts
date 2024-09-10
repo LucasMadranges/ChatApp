@@ -3,7 +3,6 @@ import {GraphQLModule} from "@nestjs/graphql";
 import {ApolloDriver, ApolloDriverConfig} from "@nestjs/apollo";
 import {PrismaModule} from "../prisma/prisma.module";
 import {UserModule} from "./user/user.module";
-import {GroupModule} from "./group/group.module";
 import {AuthModule} from "./auth/auth.module";
 
 @Module({
@@ -14,7 +13,6 @@ import {AuthModule} from "./auth/auth.module";
         }),
         PrismaModule,
         UserModule,
-        GroupModule,
         AuthModule,
     ],
 })

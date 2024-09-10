@@ -5,6 +5,7 @@ export const FETCH_USERS = gql`
         getUsers {
             firstname
             lastname
+            description
             email
         }
     }

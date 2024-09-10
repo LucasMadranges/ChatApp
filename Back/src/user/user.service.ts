@@ -31,7 +31,7 @@ export class UserService {
         });
     }
 
-    async createUser(lastname: string, firstname: string, email: string, password: string, role: Role | "USER"): Promise<User | null> {
+    async createUser(lastname: string, firstname: string, description: string, email: string, password: string, role: Role | "USER"): Promise<User | null> {
         const hashedPassword = await this.passwordService.hashPassword(password);
 
         return this.prisma.user.create({
@@ -39,13 +39,14 @@ export class UserService {
                 lastname,
                 firstname,
                 email,
+                description,
                 password: hashedPassword,
                 role,
             },
         });
     }
 
-    async updateUser(id: number, lastname: string, firstname: string, email: string, password: string, role: Role | "USER"): Promise<User | null> {
+    async updateUser(id: number, lastname: string, firstname: string, description: string, email: string, password: string, role: Role | "USER"): Promise<User | null> {
         const hashedPassword = await this.passwordService.hashPassword(password);
 
         return this.prisma.user.update({
@@ -55,6 +56,7 @@ export class UserService {
             data: {
                 lastname,
                 firstname,
+                description,
                 email,
                 password: hashedPassword,
                 role,

@@ -12,6 +12,9 @@ export class User {
     lastname: string;
 
     @Field()
+    description: string;
+
+    @Field()
     email: string;
 
     @Field()

@@ -35,11 +35,12 @@ export class UserResolver {
     async createUser(
         @Args("lastname") lastname: string,
         @Args("firstname") firstname: string,
+        @Args("description") description: string,
         @Args("email") email: string,
         @Args("password") password: string,
         @Args("role", {defaultValue: "USER"}) role: Role,
     ): Promise<User> {
-        return this.userService.createUser(lastname, firstname, email, password, role);
+        return this.userService.createUser(lastname, firstname, description, email, password, role);
     }
 
     @Mutation(() => User)
@@ -47,11 +48,12 @@ export class UserResolver {
         @Args("id") id: number,
         @Args("lastname") lastname: string,
         @Args("firstname") firstname: string,
+        @Args("description") description: string,
         @Args("email") email: string,
         @Args("password") password: string,
         @Args("role", {defaultValue: "USER"}) role: Role,
     ): Promise<User> {
-        return this.userService.updateUser(id, lastname, firstname, email, password, role);
+        return this.userService.updateUser(id, lastname, firstname, description, email, password, role);
     }
 
     @Mutation(() => Boolean)

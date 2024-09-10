@@ -40,6 +40,8 @@ export class AuthService {
                                     id: user.id,
                                     firstname: user.firstname,
                                     lastname: user.lastname,
+                                    description: user.description,
+                                    email: user.email,
                                     role: user.role,
                                 },
                                 process.env.JWT_SECRET,
@@ -58,7 +60,7 @@ export class AuthService {
         }
     }
 
-    async registerUser(lastname: string, firstname: string, email: string, password: string, confirmPassword: string, role: Role = "USER"): Promise<User> {
+    async registerUser(lastname: string, firstname: string, description: string, email: string, password: string, confirmPassword: string, role: Role = "USER"): Promise<User> {
         if (!lastname || !firstname || !email || !password || !confirmPassword) {
             throw new Error("Les champs nom, prénom, email, mot de passe et confirmation de mot de passe sont requis");
         } else {
@@ -81,7 +83,7 @@ export class AuthService {
                         if (password !== confirmPassword) {
                             throw new Error("Les mots de passe ne correspondent pas");
                         } else {
-                            return this.userService.createUser(newLastname, newFirstname, newEmail, password, role);
+                            return this.userService.createUser(newLastname, newFirstname, description, newEmail, password, role);
                         }
                     }
                 } else {

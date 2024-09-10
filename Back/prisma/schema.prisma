@@ -9,21 +9,22 @@ generator client {
 }
 
 model User {
-  id        Int    @id @default(autoincrement())
-  lastname  String
-  firstname String
-  email     String @unique
-  password  String
-  role      Role?  @default(USER)
-  Group     Group? @relation(fields: [groupId], references: [id])
-  groupId   Int?
+  id          Int    @id @default(autoincrement())
+  lastname    String
+  firstname   String
+  description String @default("")
+  email       String @unique
+  password    String
+  role        Role?  @default(USER)
+  // Group     Group? @relation(fields: [groupId], references: [id])
+  // groupId   Int?
 }
 
-model Group {
-  id       Int    @id @default(autoincrement())
-  name     String
-  userList User[]
-}
+// model Group {
+//  id       Int    @id @default(autoincrement())
+//  name     String
+//  userList User[]
+//}
 
 enum Role {
   USER
