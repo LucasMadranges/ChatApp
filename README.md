@@ -16,6 +16,11 @@ Inspired by this app : <a href="https://dribbble.com/shots/24323558-Chat-App-Das
 - NestJS
 - Prisma
 - GraphQL
+- JWT Token
+
+### Databse :
+
+- PostgresSQL
 
 ### Tools :
 
