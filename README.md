@@ -18,7 +18,7 @@ Inspired by this app : <a href="https://dribbble.com/shots/24323558-Chat-App-Das
 - GraphQL
 - JWT Token
 
-### Databse :
+### Database :
 
 - PostgresSQL
 
