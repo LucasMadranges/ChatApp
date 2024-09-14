@@ -1,11 +1,10 @@
 import {ChatAppLogo} from "@/components/Icons/ChatAppLogo";
 import Image from "next/image";
-import ProfilPicture from "../../../public/people/people-1.jpg";
 import Link from "next/link";
 import {useSession} from "@/utils/hooks/useSession";
 
 export default async function TopMenu() {
-    const session = await useSession();
+    const session: any = await useSession();
 
     return (
         <div className="flex flex-col gap-4">
@@ -17,7 +16,7 @@ export default async function TopMenu() {
             <div className="flex flex-col items-center justify-center">
                 <Link href="/app/profile"
                       className="hover:opacity-75 transition">
-                    <Image src={ProfilPicture}
+                    <Image src={session.user.imgProfile}
                            alt="Photo de profil"
                            width={512}
                            height={512}

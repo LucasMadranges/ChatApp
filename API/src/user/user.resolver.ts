@@ -51,7 +51,7 @@ export class UserResolver {
         @Args("email") email: string,
         @Args("password") password: string,
         @Args("role", {defaultValue: "USER"}) role: Role,
-        @Args("imgProfile", {defaultValue: ""}) imgProfile: string,
+        @Args("imgProfile") imgProfile: string,
     ): Promise<User> {
         return this.userService.updateUser(id, lastname, firstname, description, email, password, role, imgProfile);
     }
