@@ -1,40 +1,40 @@
 services:
-  nextjs-app:
+  app-web-chatapp:
     image: node:22
-    container_name: nextjs-app
+    container_name: app-web-chatapp
     working_dir: /app
     volumes:
-      - ./Front:/app
+      - ./AppWeb:/app
     ports:
       - "3000:3000"
     command: sh -c "npm install && npm run dev"
     depends_on:
-      - nestjs-api
-      - postgres-db
+      - api-chatapp
+      - db-chatapp
     env_file:
-      - ./Front/.env.local
+      - ./AppWeb/.env.local
     networks:
       - networkChatApp
 
-  nestjs-api:
+  api-chatapp:
     image: node:22
-    container_name: nestjs-api
+    container_name: api-chatapp
     working_dir: /app
     volumes:
-      - ./Back:/app
+      - ./API:/app
     ports:
       - "4000:4000"
     command: sh -c "npm install && npm run start:dev"
     depends_on:
-      - postgres-db
+      - db-chatapp
     env_file:
-      - ./Back/.env
+      - ./API/.env
     networks:
       - networkChatApp
 
-  postgres-db:
+  db-chatapp:
     image: postgres:13
-    container_name: postgres-db
+    container_name: db-chatapp
     env_file:
       - ./DB/.env
     volumes:
