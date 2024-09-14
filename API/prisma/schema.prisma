@@ -16,6 +16,7 @@ model User {
   email       String @unique
   password    String
   role        Role?  @default(USER)
+  imgProfile String @default("")
   // Group     Group? @relation(fields: [groupId], references: [id])
   // groupId   Int?
 }
