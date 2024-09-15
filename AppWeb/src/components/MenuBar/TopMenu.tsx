@@ -13,7 +13,7 @@ export default async function TopMenu() {
                 <ChatAppLogo className="w-8 h-8"/>
                 <span className="hidden lg:inline-block text-white">ChatApp by Lucas M.</span>
             </Link>
-            <div className="flex flex-col items-center justify-center">
+            <div className="flex flex-col items-center justify-center gap-2">
                 <Link href="/app/profile"
                       className="hover:opacity-75 transition">
                     <Image src={session.user.imgProfile}

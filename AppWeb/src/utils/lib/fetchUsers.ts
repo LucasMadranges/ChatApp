@@ -7,7 +7,7 @@ export async function fetchUsersDB() {
             query: FETCH_USERS,
         });
 
-        return data;
+        return data.getUsers;
     } catch (error: any) {
         const errorMessage = error.message.replace("Error: ApolloError: ", "");
         return {

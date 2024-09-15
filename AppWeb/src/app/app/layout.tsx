@@ -1,12 +1,12 @@
 import MenuBar from "@/components/MenuBar/MenuBar";
 import React from "react";
-import {useSession} from "@/utils/hooks/useSession";
 import {redirect} from "next/navigation";
+import {useSession} from "@/utils/hooks/useSession";
 
 export default async function AppLayout({children}: Readonly<{ children: React.ReactNode; }>) {
-    const result = await useSession();
+    const session = await useSession();
 
-    if (result.ok) {
+    if (session.ok) {
         return (
             <>
                 <MenuBar/>

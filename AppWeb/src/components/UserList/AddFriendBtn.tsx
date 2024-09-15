@@ -1,3 +1,4 @@
+"use client";
 import {AddPeopleIcon} from "@/components/Icons/AddPeopleIcon";
 import {useState} from "react";
 import {CheckIcon} from "@/components/Icons/CheckIcon";
