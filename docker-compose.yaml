@@ -4,7 +4,7 @@ services:
     container_name: app-web-chatapp
     working_dir: /app
     volumes:
-      - ./AppWeb:/app
+      - ./App/AppWeb:/app
     ports:
       - "3000:3000"
     command: sh -c "npm install && npm run dev"
@@ -12,7 +12,7 @@ services:
       - api-chatapp
       - db-chatapp
     env_file:
-      - ./AppWeb/.env.local
+      - ./App/AppWeb/.env.local
     networks:
       - networkChatApp
 

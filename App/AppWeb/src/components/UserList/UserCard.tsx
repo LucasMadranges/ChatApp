@@ -14,7 +14,7 @@ export default function UserCard({user}: {
                    height={512}
                    className="rounded-full w-20 h-20 object-cover"/>
             <div className="flex flex-col gap-2 w-full">
-                <span className="text-xl">{user.lastname} {user.firstname}</span>
+                <span className="lg:text-xl text-md">{user.lastname} {user.firstname}</span>
                 {user.description &&
                     <p className="text-sm text-gray-500 line-clamp-3">{user.description}</p>
                 }

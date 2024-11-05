@@ -50,9 +50,7 @@ export class UserService {
         });
     }
 
-    async updateUser(id: number, lastname: string, firstname: string, description: string, email: string, password: string, role: Role | "USER", imgProfile: string): Promise<User | null> {
-        const hashedPassword = await this.passwordService.hashPassword(password);
-
+    async updateUser(id: number, lastname: string, firstname: string, description: string, imgProfile: string): Promise<User | null> {
         return this.prisma.user.update({
             where: {
                 id,
@@ -61,9 +59,6 @@ export class UserService {
                 lastname,
                 firstname,
                 description,
-                email,
-                password: hashedPassword,
-                role,
                 imgProfile,
             },
         });

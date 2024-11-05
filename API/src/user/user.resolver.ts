@@ -48,12 +48,9 @@ export class UserResolver {
         @Args("lastname") lastname: string,
         @Args("firstname") firstname: string,
         @Args("description", {defaultValue: ""}) description: string,
-        @Args("email") email: string,
-        @Args("password") password: string,
-        @Args("role", {defaultValue: "USER"}) role: Role,
         @Args("imgProfile") imgProfile: string,
     ): Promise<User> {
-        return this.userService.updateUser(id, lastname, firstname, description, email, password, role, imgProfile);
+        return this.userService.updateUser(id, lastname, firstname, description, imgProfile);
     }
 
     @Mutation(() => Boolean)

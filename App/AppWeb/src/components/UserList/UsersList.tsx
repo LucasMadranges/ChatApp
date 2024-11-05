@@ -21,7 +21,7 @@ export default function UsersList() {
             return <h1>Aucun utilisateur trouvé</h1>;
         } else {
             return (
-                <section className="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full lg:gap-12 gap-6 lg:py-12 py-6 overflow-auto">
+                <section className="grid 2xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full lg:gap-12 gap-6 lg:py-12 py-6 overflow-auto">
                     {filteredData.map((user: any, index: any) => {
                         return (
                             <UserCard key={index}
