@@ -12,28 +12,28 @@ export default function LinkMenu() {
 
     const arrLink = [
         {
-            path: "/app/chats",
+            path: "/chats",
             text: "Messages",
             icon: <MessageIcon width="32px"
                                height="32px"
                                color="white"/>,
         },
         {
-            path: "/app/friends",
+            path: "/friends",
             text: "Amis",
             icon: <PeoplesIcon width="32px"
                                height="32px"
                                color="white"/>,
         },
         {
-            path: "/app/search",
+            path: "/search",
             text: "Recherche",
             icon: <SearchIcon width="32px"
                               height="32px"
                               color="white"/>,
         },
         {
-            path: "/app/notifications",
+            path: "/notifications",
             text: "Notifications",
             icon: <BellIcon width="32px"
                             height="32px"

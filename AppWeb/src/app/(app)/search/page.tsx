@@ -1,6 +1,6 @@
 import {SearchIcon} from "@/components/Icons/SearchIcon";
-import UsersList from "@/components/UserList/UsersList";
 import SearchInput from "@/components/Search/SearchInput";
+import UsersList from "@/components/UserList/UsersList";
 
 export default function Page() {
     return (

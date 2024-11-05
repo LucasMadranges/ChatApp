@@ -14,7 +14,7 @@ export default async function TopMenu() {
                 <span className="hidden lg:inline-block text-white">ChatApp by Lucas M.</span>
             </Link>
             <div className="flex flex-col items-center justify-center gap-2">
-                <Link href="/app/profile"
+                <Link href="/profile"
                       className="hover:opacity-75 transition">
                     <Image src={session.user.imgProfile}
                            alt="Photo de profil"

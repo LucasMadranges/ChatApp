@@ -14,6 +14,6 @@ export default async function AppLayout({children}: Readonly<{ children: React.R
             </>
         );
     } else {
-        redirect("/auth/signin");
+        redirect("/signin");
     }
 }
