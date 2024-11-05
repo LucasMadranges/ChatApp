@@ -22,7 +22,7 @@ export default function SignupForm() {
         if (result.message) {
             setErrorMsg(result.message);
         } else {
-            router.push("/auth/signin");
+            router.push("/signin");
         }
     }
 
@@ -77,7 +77,7 @@ export default function SignupForm() {
             </SubmitBtn>
             <div className="mt-2 flex items-center gap-2">
                 <span>Déjà un compte ?</span>
-                <Link href="/auth/signin"
+                <Link href="/signin"
                       className="underline underline-offset-2">Se connecter</Link>
             </div>
         </form>

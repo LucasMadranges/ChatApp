@@ -22,7 +22,7 @@ export default function SigninForm() {
             setErrorMsg(result.message);
         } else {
             await setToken(result.token);
-            router.push("/app/chats");
+            router.push("/chats");
         }
     }
 
@@ -63,7 +63,7 @@ export default function SigninForm() {
             </SubmitBtn>
             <div className="mt-2 flex items-center gap-2">
                 <span>Pas encore de compte ?</span>
-                <Link href="/auth/signup"
+                <Link href="/signup"
                       className="underline underline-offset-2">S&apos;inscrire</Link>
             </div>
         </form>

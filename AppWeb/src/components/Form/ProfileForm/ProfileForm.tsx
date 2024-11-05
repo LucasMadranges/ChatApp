@@ -1,8 +1,9 @@
 "use client";
-import {useRef, useState} from "react";
+import {FormEvent, useRef, useState} from "react";
 import Image from "next/image";
 import {AddCircleIcon} from "@/components/Icons/AddCircleIcon";
 import {WarningIcon} from "@/components/Icons/WarningIcon";
+import {updateDB} from "@/utils/lib/updateDB";
 
 export default function ProfileForm({session}: any) {
     const [lastname, setLastname] = useState(session.user.lastname);
@@ -12,8 +13,17 @@ export default function ProfileForm({session}: any) {
     const [imgProfile, setImgProfile] = useState(session.user.imgProfile);
     const refFile: any = useRef(0);
 
+    function submitForm(event: FormEvent<HTMLFormElement>) {
+        event.preventDefault();
+
+        const result = updateDB(session.user.id, lastname, firstname, description, imgProfile);
+
+        console.log(result);
+    }
+
     return (
-        <form className="w-full flex flex-col items-center justify-start gap-12">
+        <form onSubmit={submitForm}
+              className="w-full flex flex-col items-center justify-start gap-12">
             <input type="file"
                    ref={refFile}
                    hidden/>
