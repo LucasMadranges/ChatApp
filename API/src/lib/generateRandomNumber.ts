@@ -1,3 +1,3 @@
-export function generateRandomNumber() {
-    return Math.floor(Math.random() * 10) + 1;
+export function generateRandomNumber(min: number, max: number) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
