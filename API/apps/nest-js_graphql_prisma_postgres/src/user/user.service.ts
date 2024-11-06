@@ -35,7 +35,7 @@ export class UserService {
 
     async createUser(lastname: string, firstname: string, email: string, password: string, role: Role | "USER"): Promise<User | null> {
         const hashedPassword = await this.passwordService.hashPassword(password);
-        const index = generateRandomNumber();
+        const index = generateRandomNumber(1, 10);
         const defaultImgProfile = `${process.env.AWS_LINK}/default-avatar/default-avatar-${index}.svg`;
 
         return this.prisma.user.create({
