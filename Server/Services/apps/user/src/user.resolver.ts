@@ -37,7 +37,7 @@ export class UserResolver {
         @Args("firstname") firstname: string,
         @Args("email") email: string,
         @Args("password") password: string,
-        @Args("role", {defaultValue: "USER"}) role: Role,
+        @Args("role", {type: () => String, defaultValue: "USER"}) role: Role,
     ): Promise<User> {
         return this.userService.createUser(lastname, firstname, email, password, role);
     }
