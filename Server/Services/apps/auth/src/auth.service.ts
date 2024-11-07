@@ -1,7 +1,7 @@
 import {Injectable} from "@nestjs/common";
 import {Role, User} from "@prisma/client";
-import {PasswordService} from "../password/password.service";
-import {UserService} from "../user/user.service";
+import {PasswordService} from "../../password/src/password.service";
+import {UserService} from "../../user/src/user.service";
 import * as jwt from "jsonwebtoken";
 
 @Injectable()

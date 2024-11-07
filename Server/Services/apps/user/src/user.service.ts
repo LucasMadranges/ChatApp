@@ -1,8 +1,8 @@
 import {Injectable} from "@nestjs/common";
-import {PrismaService} from "../../prisma/prisma.service";
+import {PrismaService} from "../../../prisma/prisma.service";
 import {Role, User} from "@prisma/client";
-import {PasswordService} from "../password/password.service";
-import {generateRandomNumber} from "../lib/generateRandomNumber";
+import {PasswordService} from "../../password/src/password.service";
+import {generateRandomNumber} from "../../../utils/lib/generateRandomNumber";
 import * as process from "node:process";
 
 @Injectable()
@@ -35,7 +35,7 @@ export class UserService {
 
     async createUser(lastname: string, firstname: string, email: string, password: string, role: Role | "USER"): Promise<User | null> {
         const hashedPassword = await this.passwordService.hashPassword(password);
-        const index = generateRandomNumber();
+        const index = generateRandomNumber(1, 10);
         const defaultImgProfile = `${process.env.AWS_LINK}/default-avatar/default-avatar-${index}.svg`;
 
         return this.prisma.user.create({

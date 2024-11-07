@@ -1,8 +1,8 @@
 import {Args, Mutation, Query, Resolver} from "@nestjs/graphql";
-import {User} from "../user/user.model";
+import {User} from "../../user/src/entities/user.entity";
 import {AuthService} from "./auth.service";
 import {Role} from "@prisma/client";
-import {Auth} from "./auth.model";
+import {Auth} from "./entities/auth.entity";
 
 @Resolver(() => User)
 export class AuthResolver {
@@ -27,7 +27,7 @@ export class AuthResolver {
         @Args("email") email: string,
         @Args("password") password: string,
         @Args("confirmPassword") confirmPassword: string,
-        @Args("role", {defaultValue: "USER"}) role: Role,
+        @Args("role", {type: () => String, defaultValue: "USER"}) role: Role,
     ): Promise<User> {
         return this.authService.registerUser(lastname, firstname, email, password, confirmPassword, role);
     }

@@ -1,3 +1,6 @@
+include:
+  - "./Server/docker-compose.yml"
+
 services:
   app-web-chatapp:
     image: node:22
@@ -9,26 +12,10 @@ services:
       - "3000:3000"
     command: sh -c "npm install && npm run dev"
     depends_on:
-      - api-chatapp
+      - gateway-chatapp
       - db-chatapp
     env_file:
       - ./App/AppWeb/.env.local
-    networks:
-      - networkChatApp
-
-  api-chatapp:
-    image: node:22
-    container_name: api-chatapp
-    working_dir: /app
-    volumes:
-      - ./API:/app
-    ports:
-      - "4000:4000"
-    command: sh -c "npm install && npm run start:dev"
-    depends_on:
-      - db-chatapp
-    env_file:
-      - ./API/.env
     networks:
       - networkChatApp
 
