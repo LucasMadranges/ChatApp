@@ -1,0 +1,67 @@
+services:
+  gateway-chatapp:
+    image: node:22
+    container_name: gateway-chatapp
+    working_dir: /app
+    volumes:
+      - ./Services:/app
+    ports:
+      - "4000:4000"
+    command: sh -c "npm install && npm run start:dev"
+    depends_on:
+      - user-chatapp
+      - auth-chatapp
+      - password-chatapp
+    env_file:
+      - ./Services/.env
+    networks:
+      - networkChatApp
+  
+  user-chatapp:
+    image: node:22
+    container_name: service-user-chatapp
+    working_dir: /app
+    volumes:
+      - ./Services:/app
+    ports:
+      - "4001:4001"
+    command: sh -c "npm install && npm run start:dev user"
+    depends_on:
+      - db-chatapp
+    env_file:
+      - ./Services/.env
+    networks:
+      - networkChatApp
+  
+  auth-chatapp:
+    image: node:22
+    container_name: service-auth-chatapp
+    working_dir: /app
+    volumes:
+      - ./Services:/app
+    ports:
+      - "4002:4002"
+    command: sh -c "npm install && npm run start:dev auth"
+    depends_on:
+      - db-chatapp
+    env_file:
+      - ./Services/.env
+    networks:
+      - networkChatApp
+
+
+  password-chatapp:
+    image: node:22
+    container_name: service-password-chatapp
+    working_dir: /app
+    volumes:
+      - ./Services:/app
+    ports:
+      - "4003:4003"
+    command: sh -c "npm install && npm rebuild bcrypt --build-from-source && npm run start:dev password"
+    depends_on:
+      - db-chatapp
+    env_file:
+      - ./Services/.env
+    networks:
+      - networkChatApp
