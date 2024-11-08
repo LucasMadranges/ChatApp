@@ -21,6 +21,7 @@ import {IntrospectAndCompose} from "@apollo/gateway";
                         {name: "auth", url: `http://auth-chatapp:${process.env.PORT_AUTH}/graphql`},
                         {name: "password", url: `http://password-chatapp:${process.env.PORT_PASSWORD}/graphql`},
                     ],
+                    pollIntervalInMs: 1000,
                 }),
             },
         }),
