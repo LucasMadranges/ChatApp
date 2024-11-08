@@ -1,4 +1,4 @@
-import {Args, Mutation, Query, Resolver} from "@nestjs/graphql";
+import {Args, Directive, Mutation, Query, Resolver} from "@nestjs/graphql";
 import {User} from "./entities/user.entity";
 import {Role} from "@prisma/client";
 import {UserService} from "./user.service";
@@ -8,6 +8,13 @@ export class UserResolver {
     constructor(
         private readonly userService: UserService,
     ) {
+    }
+
+    // Utilisé par docker pour gérer la health du container
+    @Query(() => String)
+    @Directive("@shareable")
+    healthCheck() {
+        return "ok";
     }
 
     // Query Function
