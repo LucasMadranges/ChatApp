@@ -23,14 +23,14 @@ ChatApp is an real-time application for talk with your friends, add them and man
     - ![Next.js Badge](https://img.shields.io/badge/Next.js-000?logo=nextdotjs&logoColor=fff&style=for-the-badge)
     - ![React Badge](https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=for-the-badge)
     - ![Tailwind CSS Badge](https://img.shields.io/badge/Tailwind%20CSS-06B6D4?logo=tailwindcss&logoColor=fff&style=for-the-badge)
-        - ![Apollo GraphQL Badge](https://img.shields.io/badge/Apollo%20GraphQL-311C87?logo=apollographql&logoColor=fff&style=for-the-badge)
-    - ![JS Cookie Badge](https://img.shields.io/badge/JS%20Cookie-F7DF1E?logo=cookiecutter&logoColor=000&style=for-the-badge)
-    - ![TypeScript Badge](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=for-the-badge)
+    - ![Apollo GraphQL Badge](https://img.shields.io/badge/Apollo%20GraphQL-311C87?logo=apollographql&logoColor=fff&style=for-the-badge)
+        - ![JS Cookie Badge](https://img.shields.io/badge/JS%20Cookie-F7DF1E?logo=cookiecutter&logoColor=000&style=for-the-badge)
+        - ![TypeScript Badge](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=for-the-badge)
 
 - **App Mobile** :
     - ![Expo Badge](https://img.shields.io/badge/Expo-000020?logo=expo&logoColor=fff&style=for-the-badge)
-        - ![React Native Badge](https://img.shields.io/badge/React%20Native-61DAFB?logo=react&logoColor=000&style=for-the-badge)
-    - ![TypeScript Badge](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=for-the-badge)
+    - ![React Native Badge](https://img.shields.io/badge/React%20Native-61DAFB?logo=react&logoColor=000&style=for-the-badge)
+        - ![TypeScript Badge](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=fff&style=for-the-badge)
 
 - **Gateway and microservices** :
     - ![NestJS Badge](https://img.shields.io/badge/NestJS-E0234E?logo=nestjs&logoColor=fff&style=for-the-badge)
@@ -125,7 +125,7 @@ with : [Environment setup - React Native](https://reactnative.dev/docs/environme
 
 When you have finished, open your terminal on the root project and write this command :
 
-```cd Platform/Applications/Mobile && npm i && npm run start```
+```cd App/AppMobile && npm i && npm run start```
 
 You should see something on your terminal with a list of commands with those three :
 
