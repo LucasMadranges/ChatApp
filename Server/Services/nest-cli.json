@@ -28,15 +28,6 @@
         "tsConfigPath": "apps/user/tsconfig.app.json"
       }
     },
-    "password": {
-      "type": "application",
-      "root": "apps/password",
-      "entryFile": "main",
-      "sourceRoot": "apps/password/src",
-      "compilerOptions": {
-        "tsConfigPath": "apps/password/tsconfig.app.json"
-      }
-    },
     "auth": {
       "type": "application",
       "root": "apps/auth",

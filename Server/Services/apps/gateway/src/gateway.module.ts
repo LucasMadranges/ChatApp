@@ -19,7 +19,6 @@ import {IntrospectAndCompose} from "@apollo/gateway";
                     subgraphs: [
                         {name: "user", url: `http://user-chatapp:${process.env.PORT_USER}/graphql`},
                         {name: "auth", url: `http://auth-chatapp:${process.env.PORT_AUTH}/graphql`},
-                        {name: "password", url: `http://password-chatapp:${process.env.PORT_PASSWORD}/graphql`},
                     ],
                     pollIntervalInMs: 1000,
                 }),
