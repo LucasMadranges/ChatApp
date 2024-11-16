@@ -78,10 +78,7 @@ export default function ProfileForm({session}: any) {
                         </div>
                         <AddCircleIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:group-hover:block transition z-10 h-12 w-12"/>
                     </div>
-                    <Buttons bgColor={"green-600"}
-                             textColor={"white"}
-                             hoverBgColor={"green-700"}
-                             className={"px-4 py-2 lg:hidden"}
+                    <Buttons className={"bg-green-600 hover:bg-green-700 text-white px-4 py-2 lg:hidden"}
                              handleClick={() => refFile.current.click()}>Modifier l&apos;image</Buttons>
                 </div>
                 <div className="flex flex-col items-center gap-6 w-full">
@@ -97,7 +94,7 @@ export default function ProfileForm({session}: any) {
                                onChange={(e) => setFirstname(e.target.value)}
                                className="placeholder:text-gray-400 rounded-full bg-gray-200 px-4 py-3 w-full"/>
                     </div>
-                    <input type="text"
+                    <input type="email"
                            placeholder="Email"
                            value={email}
                            onChange={(e) => setEmail(e.target.value)}
@@ -112,12 +109,8 @@ export default function ProfileForm({session}: any) {
                         <span className="text-sm text-amber-600">Des modifications ne sont pas enregistrées</span>
                     </div>
                     <div className="w-full flex flex-col sm:flex-row justify-end items-center gap-8">
-                        <Buttons textHoverColor={"green-700"}
-                                 className={"w-full sm:w-fit"}>Annuler</Buttons>
-                        <Buttons bgColor={"green-600"}
-                                 hoverBgColor={"green-700"}
-                                 textColor={"white"}
-                                 className={"px-4 py-2 w-full sm:w-fit"}>
+                        <Buttons className={"hover:text-green-700 w-full sm:w-fit"}>Annuler</Buttons>
+                        <Buttons className={"bg-green-600 hover:bg-green-700 text-white px-4 py-2 w-full sm:w-fit "}>
                             Sauvegarder
                         </Buttons>
                     </div>
@@ -140,16 +133,12 @@ export default function ProfileForm({session}: any) {
                    footer={
                        <>
                            <Buttons handleClick={handleCloseModal}
-                                    textHoverColor={"green-700"}
-                                    className={"px-4 py-2"}>Annuler</Buttons>
+                                    className={"hover:text-green-700 px-4 py-2"}>Annuler</Buttons>
                            <Buttons handleClick={handleConfirmModal}
-                                    bgColor={"green-600"}
-                                    hoverBgColor={"green-700"}
-                                    textColor={"white"}
-                                    className={"px-4 py-2"}>Enregistrer</Buttons>
+                                    className={"bg-green-600 hover:bg-green-700 text-white px-4 py-2"}>Enregistrer</Buttons>
                        </>
                    }
-                   footerClass={"justify-end gap-8"}
+                   footerClass={"justify-end gap-4"}
             />
         </>
     );
