@@ -28,6 +28,7 @@ ChatApp is an real-time application for talk with your friends, add them and man
     - Libraries
         - ![Apollo GraphQL Badge](https://img.shields.io/badge/Apollo%20GraphQL-311C87?logo=apollographql&logoColor=fff&style=for-the-badge)
         - ![JS Cookie Badge](https://img.shields.io/badge/JS%20Cookie-F7DF1E?logo=cookiecutter&logoColor=000&style=for-the-badge)
+        - ![React Cropper Badge](https://img.shields.io/badge/React%20Cropper-61DAFB?logo=react&logoColor=000&style=for-the-badge)
 
 - **App Mobile** :
     - Framework :
