@@ -6,7 +6,6 @@ import {WarningIcon} from "@/components/Icons/WarningIcon";
 import {updateDB} from "@/utils/lib/updateDB";
 import Modal from "@/components/Modal/Modal";
 import Buttons from "@/components/Buttons/Buttons";
-import {Cropper} from "react-cropper";
 import "cropperjs/dist/cropper.css";
 
 export default function ProfileForm({session}: any) {
@@ -104,8 +103,8 @@ export default function ProfileForm({session}: any) {
                         <WarningIcon className="[&_path]:fill-amber-600"/>
                         <span className="text-sm text-amber-600">Des modifications ne sont pas enregistrées</span>
                     </div>
-                    <div className="flex gap-4">
-                        <Buttons>Annuler</Buttons>
+                    <div className="w-full flex justify-end items-center gap-8">
+                        <Buttons textHoverColor={"green-700"}>Annuler</Buttons>
                         <Buttons bgColor={"green-600"}
                                  hoverBgColor={"green-700"}
                                  textColor={"white"}
@@ -122,12 +121,7 @@ export default function ProfileForm({session}: any) {
                        <h2>Modifier l&apos;image de profil</h2>
                    }
                    headerClass={"justify-center"}
-                   body={<Cropper src={changeImage}
-                                  className="h-full w-full object-cover"
-                                  initialAspectRatio={16 / 16}
-                                  viewMode={1}
-                                  guides={false}
-                                  ref={refCropper}/>}
+                   body={<h2>Cropper</h2>}
                    footer={
                        <>
                            <Buttons handleClick={handleCloseModal}
@@ -144,3 +138,13 @@ export default function ProfileForm({session}: any) {
         </>
     );
 }
+
+/*
+<Cropper src={changeImage}
+                                  className="h-full w-full object-cover"
+                                  initialAspectRatio={16 / 16}
+                                  viewMode={1}
+                                  guides={false}
+                                  responsive={true}
+                                  ref={refCropper}/>
+ */
