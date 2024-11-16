@@ -24,7 +24,9 @@ export default function Modal({
     return (
         isShow && <div className="absolute top-0 left-0 w-svw h-svh bg-black bg-opacity-50"
                        onClick={handleCloseModal}>
-            <div className="rounded-2xl bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col min-w-fit md:w-3/4 lg:w-1/2 max-w-96 min-h-fit max-h-96 md:h-3/4">
+            <div className="lg:rounded-2xl bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col 
+                            lg:w-[calc(100svh-96px)] w-svw
+                            lg:h-3/4 h-svh">
                 <div id="header"
                      className={`relative border-b border-gray-200 p-4 flex items-center ${headerClass}`}>
                     {header || <h2>Default header!</h2>}

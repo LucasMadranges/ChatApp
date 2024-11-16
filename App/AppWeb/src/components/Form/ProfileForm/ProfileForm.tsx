@@ -7,6 +7,7 @@ import {updateDB} from "@/utils/lib/updateDB";
 import Modal from "@/components/Modal/Modal";
 import Buttons from "@/components/Buttons/Buttons";
 import "cropperjs/dist/cropper.css";
+import {Cropper} from "react-cropper";
 
 export default function ProfileForm({session}: any) {
     const [lastname, setLastname] = useState(session.user.lastname);
@@ -47,7 +48,7 @@ export default function ProfileForm({session}: any) {
     }
 
     function handleCloseModal(e: any) {
-        if (e.target === e.currentTarget) {
+        if (e.target === e.currentTarget || e.target.parentNode.parentNode === e.currentTarget) {
             refFile.current.value = "";
             setChangeImage(URL.createObjectURL(new Blob));
             setIsModalShow(false);
@@ -63,18 +64,25 @@ export default function ProfileForm({session}: any) {
                        hidden
                        accept="image/png, image/jpeg, image/webp"
                        onInput={handleChangePicture}/>
-                <div className="group relative hover:cursor-pointer"
-                     onClick={() => {
-                         refFile.current.click();
-                     }}>
-                    <div className="group-hover:blur-sm transition">
-                        <Image src={imgProfile}
-                               alt="Photo de profil"
-                               width={256}
-                               height={256}
-                               className="rounded-full h-24 w-24 object-cover"/>
+                <div className="flex flex-col gap-4 justify-center items-center">
+                    <div className="group relative hover:cursor-pointer"
+                         onClick={() => {
+                             refFile.current.click();
+                         }}>
+                        <div className="lg:group-hover:blur-sm transition">
+                            <Image src={imgProfile}
+                                   alt="Photo de profil"
+                                   width={256}
+                                   height={256}
+                                   className="rounded-full h-24 w-24 object-cover"/>
+                        </div>
+                        <AddCircleIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:group-hover:block transition z-10 h-12 w-12"/>
                     </div>
-                    <AddCircleIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden group-hover:block transition z-10 h-12 w-12"/>
+                    <Buttons bgColor={"green-600"}
+                             textColor={"white"}
+                             hoverBgColor={"green-700"}
+                             className={"px-4 py-2 lg:hidden"}
+                             handleClick={() => refFile.current.click()}>Modifier l&apos;image</Buttons>
                 </div>
                 <div className="flex flex-col items-center gap-6 w-full">
                     <div className="flex flex-col md:flex-row gap-6 w-full">
@@ -103,12 +111,13 @@ export default function ProfileForm({session}: any) {
                         <WarningIcon className="[&_path]:fill-amber-600"/>
                         <span className="text-sm text-amber-600">Des modifications ne sont pas enregistrées</span>
                     </div>
-                    <div className="w-full flex justify-end items-center gap-8">
-                        <Buttons textHoverColor={"green-700"}>Annuler</Buttons>
+                    <div className="w-full flex flex-col sm:flex-row justify-end items-center gap-8">
+                        <Buttons textHoverColor={"green-700"}
+                                 className={"w-full sm:w-fit"}>Annuler</Buttons>
                         <Buttons bgColor={"green-600"}
                                  hoverBgColor={"green-700"}
                                  textColor={"white"}
-                                 className={"px-4 py-2"}>
+                                 className={"px-4 py-2 w-full sm:w-fit"}>
                             Sauvegarder
                         </Buttons>
                     </div>
@@ -121,11 +130,17 @@ export default function ProfileForm({session}: any) {
                        <h2>Modifier l&apos;image de profil</h2>
                    }
                    headerClass={"justify-center"}
-                   body={<h2>Cropper</h2>}
+                   body={<Cropper src={changeImage}
+                                  className="h-full w-full object-cover"
+                                  aspectRatio={16 / 16}
+                                  viewMode={1}
+                                  guides={true}
+                                  responsive={true}
+                                  ref={refCropper}/>}
                    footer={
                        <>
                            <Buttons handleClick={handleCloseModal}
-                                    hoverBgColor={"green-700"}
+                                    textHoverColor={"green-700"}
                                     className={"px-4 py-2"}>Annuler</Buttons>
                            <Buttons handleClick={handleConfirmModal}
                                     bgColor={"green-600"}
@@ -138,13 +153,3 @@ export default function ProfileForm({session}: any) {
         </>
     );
 }
-
-/*
-<Cropper src={changeImage}
-                                  className="h-full w-full object-cover"
-                                  initialAspectRatio={16 / 16}
-                                  viewMode={1}
-                                  guides={false}
-                                  responsive={true}
-                                  ref={refCropper}/>
- */
