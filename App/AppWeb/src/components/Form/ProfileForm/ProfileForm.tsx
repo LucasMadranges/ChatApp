@@ -6,6 +6,8 @@ import {WarningIcon} from "@/components/Icons/WarningIcon";
 import {updateDB} from "@/utils/lib/updateDB";
 import Modal from "@/components/Modal/Modal";
 import Buttons from "@/components/Buttons/Buttons";
+import {Cropper} from "react-cropper";
+import "cropperjs/dist/cropper.css";
 
 export default function ProfileForm({session}: any) {
     const [lastname, setLastname] = useState(session.user.lastname);
@@ -13,9 +15,11 @@ export default function ProfileForm({session}: any) {
     const [email, setEmail] = useState(session.user.email);
     const [description, setDescription] = useState(session.user.description);
     const [imgProfile, setImgProfile] = useState(session.user.imgProfile);
-    const [changeImage, setChangeImage] = useState(null);
+    const [changeImage, setChangeImage] = useState("");
     const [isModalShow, setIsModalShow] = useState(false);
+
     const refFile: any = useRef(0);
+    const refCropper: any = useRef(0);
 
     function handleSubmitForm(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
@@ -29,12 +33,24 @@ export default function ProfileForm({session}: any) {
         const file = refFile.current.files[0];
 
         if (!file) return;
-        
-        setIsModalShow(true);
+
+        const reader = new FileReader();
+        reader.onload = () => {
+            setChangeImage(reader.result as any);
+            setIsModalShow(true);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function handleConfirmModal(e: any) {
+        setImgProfile(refCropper.current.cropper.getCroppedCanvas().toDataURL());
+        handleCloseModal(e);
     }
 
     function handleCloseModal(e: any) {
         if (e.target === e.currentTarget) {
+            refFile.current.value = "";
+            setChangeImage(URL.createObjectURL(new Blob));
             setIsModalShow(false);
         }
     }
@@ -88,9 +104,15 @@ export default function ProfileForm({session}: any) {
                         <WarningIcon className="[&_path]:fill-amber-600"/>
                         <span className="text-sm text-amber-600">Des modifications ne sont pas enregistrées</span>
                     </div>
-                    <button className="bg-green-600 text-white w-fit px-4 py-2 rounded-full transition hover:bg-green-700 active:scale-95">
-                        Sauvegarder
-                    </button>
+                    <div className="flex gap-4">
+                        <Buttons>Annuler</Buttons>
+                        <Buttons bgColor={"green-600"}
+                                 hoverBgColor={"green-700"}
+                                 textColor={"white"}
+                                 className={"px-4 py-2"}>
+                            Sauvegarder
+                        </Buttons>
+                    </div>
                 </div>
             </form>
 
@@ -100,15 +122,21 @@ export default function ProfileForm({session}: any) {
                        <h2>Modifier l&apos;image de profil</h2>
                    }
                    headerClass={"justify-center"}
+                   body={<Cropper src={changeImage}
+                                  className="h-full w-full object-cover"
+                                  initialAspectRatio={16 / 16}
+                                  viewMode={1}
+                                  guides={false}
+                                  ref={refCropper}/>}
                    footer={
                        <>
                            <Buttons handleClick={handleCloseModal}
-                                    hoverBgColor={"text-green-700"}
+                                    hoverBgColor={"green-700"}
                                     className={"px-4 py-2"}>Annuler</Buttons>
-                           <Buttons handleClick={handleCloseModal}
-                                    bgColor={"bg-green-600"}
-                                    hoverBgColor={"bg-green-700"}
-                                    textColor={"text-white"}
+                           <Buttons handleClick={handleConfirmModal}
+                                    bgColor={"green-600"}
+                                    hoverBgColor={"green-700"}
+                                    textColor={"white"}
                                     className={"px-4 py-2"}>Enregistrer</Buttons>
                        </>
                    }

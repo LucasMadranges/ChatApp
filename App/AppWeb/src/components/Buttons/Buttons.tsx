@@ -7,10 +7,10 @@ export default function Buttons({children, textColor, textHoverColor, bgColor, h
     bgColor?: string,
     hoverBgColor?: string,
     className?: string,
-    handleClick: MouseEventHandler
+    handleClick?: MouseEventHandler
 }) {
     return (
         <button onClick={handleClick}
-                className={`${bgColor} hover:${hoverBgColor} ${textColor} hover:${textHoverColor} w-fit rounded-full transition active:scale-95 ${className}`}>{children}</button>
+                className={`bg-${bgColor} hover:bg-${hoverBgColor} text-${textColor} hover:bg-${textHoverColor} w-fit rounded-full transition active:scale-95 ${className}`}>{children}</button>
     );
 }
