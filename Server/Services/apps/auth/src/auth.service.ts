@@ -1,14 +1,13 @@
 import {Injectable} from "@nestjs/common";
 import {Role, User} from "@prisma/client";
-import {PasswordService} from "../../password/src/password.service";
 import {UserService} from "../../user/src/user.service";
 import * as jwt from "jsonwebtoken";
+import {comparePasswords} from "../../../utils/lib/comparePassword";
 
 @Injectable()
 export class AuthService {
     constructor(
         private userService: UserService,
-        private passwordService: PasswordService,
     ) {
     }
 
@@ -31,7 +30,7 @@ export class AuthService {
                     if (password !== confirmPassword) {
                         throw new Error("Les mots de passe ne correspondent pas");
                     } else {
-                        const isCorrectPassword = await this.passwordService.comparePasswords(password, user.password);
+                        const isCorrectPassword = await comparePasswords(password, user.password);
 
                         if (!isCorrectPassword) {
                             throw new Error("L'email ou le mot de passe est incorrect");

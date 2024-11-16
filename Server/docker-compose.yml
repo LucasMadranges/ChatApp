@@ -13,8 +13,6 @@ services:
         condition: service_healthy
       auth-chatapp:
         condition: service_healthy
-      password-chatapp:
-        condition: service_healthy
     env_file:
       - ./Services/.env
     networks:
@@ -58,27 +56,6 @@ services:
       - networkChatApp
     healthcheck:
       test: [ "CMD", "curl", "-f", "-XPOST", "-H", "Content-Type: application/json", "-d", '{ "query": "{ healthCheck }" }', "http://auth-chatapp:4002/graphql" ]
-      interval: 5s
-      timeout: 10s
-      retries: 10
-
-  password-chatapp:
-    image: node:22
-    container_name: service-password-chatapp
-    working_dir: /app
-    volumes:
-      - ./Services:/app
-    ports:
-      - "4003:4003"
-    command: sh -c "npm install && npm rebuild bcrypt --build-from-source && npm run start:dev password"
-    depends_on:
-      - db-chatapp
-    env_file:
-      - ./Services/.env
-    networks:
-      - networkChatApp
-    healthcheck:
-      test: [ "CMD", "curl", "-f", "-XPOST", "-H", "Content-Type: application/json", "-d", '{ "query": "{ healthCheck }" }', "http://password-chatapp:4003/graphql" ]
       interval: 5s
       timeout: 10s
       retries: 10
