@@ -149,7 +149,8 @@ export default function ProfileForm({session}: any) {
                                     className={"px-4 py-2"}>Enregistrer</Buttons>
                        </>
                    }
-                   footerClass={"justify-end gap-8"}/>
+                   footerClass={"justify-end gap-8"}
+            />
         </>
     );
 }
