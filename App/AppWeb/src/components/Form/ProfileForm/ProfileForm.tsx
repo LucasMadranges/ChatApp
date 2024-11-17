@@ -48,7 +48,7 @@ export default function ProfileForm({session}: any) {
     }
 
     function handleCloseModal(e: any) {
-        if (e.target === e.currentTarget || e.target.parentNode.parentNode === e.currentTarget) {
+        if (e.currentTarget.tagName === "BUTTON" || e.target === e.currentTarget) {
             refFile.current.value = "";
             setChangeImage(URL.createObjectURL(new Blob));
             setIsModalShow(false);
