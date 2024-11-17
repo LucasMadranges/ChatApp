@@ -9,12 +9,19 @@ import Buttons from "@/components/Buttons/Buttons";
 import "cropperjs/dist/cropper.css";
 import {Cropper} from "react-cropper";
 import {TrashIcon} from "@/components/Icons/TrashIcon";
+import {getUserById} from "@/utils/lib/getUserById";
+import Loading from "@/components/Loading/Loading";
+import Input from "@/components/Form/Input/Input";
+import TextArea from "@/components/Form/TextArea/TextArea";
+import {useRouter} from "next/navigation";
 
 export default function ProfileForm({session}: any) {
-    const [lastname, setLastname] = useState(session.user.lastname);
-    const [firstname, setFirstname] = useState(session.user.firstname);
-    const [description, setDescription] = useState(session.user.description);
-    const [imgProfile, setImgProfile] = useState(session.user.imgProfile);
+    const [user, setUser]: any = useState(null);
+
+    const [lastname, setLastname] = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [description, setDescription] = useState("");
+    const [imgProfile, setImgProfile] = useState("");
 
     const [changeImage, setChangeImage] = useState("");
     const [isModalShow, setIsModalShow] = useState(false);
@@ -23,25 +30,49 @@ export default function ProfileForm({session}: any) {
 
     const refFile: any = useRef(0);
     const refCropper: any = useRef(0);
+    const router = useRouter();
 
     useEffect(() => {
-        if (lastname !== session.user.lastname ||
-            firstname !== session.user.firstname ||
-            description !== session.user.description ||
-            imgProfile !== session.user.imgProfile) {
+        async function handleGetUser() {
+            const {user} = await getUserById(session.user.id);
+            setUser(user);
+        }
+
+        handleGetUser();
+    }, [session.user.id]);
+
+    useEffect(() => {
+        if (!user) return;
+
+        setLastname(user.lastname);
+        setFirstname(user.firstname);
+        setDescription(user.description);
+        setImgProfile(user.imgProfile);
+    }, [user]);
+
+    useEffect(() => {
+        if (!user) return;
+
+        if (lastname !== user.lastname ||
+            firstname !== user.firstname ||
+            description !== user.description ||
+            imgProfile !== user.imgProfile) {
             setOnModification(true);
         } else {
             setOnModification(false);
         }
-    }, [description, firstname, imgProfile, lastname,
-        session.user.description, session.user.firstname, session.user.imgProfile, session.user.lastname]);
+    }, [description, firstname, imgProfile, lastname, user]);
 
-    function handleSubmitForm(event: FormEvent<HTMLFormElement>) {
+    async function handleSubmitForm(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const result = updateDB(session.user.id, lastname, firstname, description, imgProfile);
+        const result = await updateDB(session.user.id, lastname, firstname, description, imgProfile);
 
-        console.log(result);
+        if (result.ok) {
+            console.log("Données mises à jour avec succès, rafraîchissement en cours...");
+        } else {
+            console.error("Erreur lors de la mise à jour des données", result);
+        }
     }
 
     function handleChangePicture() {
@@ -77,12 +108,13 @@ export default function ProfileForm({session}: any) {
     function handleResetAllValue(e: any) {
         e.preventDefault();
 
-        setLastname(session.user.lastname);
-        setFirstname(session.user.firstname);
-        setDescription(session.user.description);
-        setEmail(session.user.email);
-        setImgProfile(session.user.imgProfile);
+        setLastname(user.lastname);
+        setFirstname(user.firstname);
+        setDescription(user.description);
+        setImgProfile(user.imgProfile);
     }
+
+    if (!user) return <Loading/>;
 
     return (
         <>
@@ -118,21 +150,18 @@ export default function ProfileForm({session}: any) {
                 </div>
                 <div className="flex flex-col items-center gap-6 w-full">
                     <div className="flex flex-col md:flex-row gap-6 w-full">
-                        <input type="text"
-                               placeholder="Nom"
+                        <Input placeholder={"Nom"}
+                               type={"text"}
                                value={lastname}
-                               onChange={(e) => setLastname(e.target.value)}
-                               className="placeholder:text-gray-400 rounded-full bg-gray-200 px-4 py-3 w-full"/>
-                        <input type="text"
-                               placeholder="Prénom"
+                               onChange={(e) => setLastname(e.target.value)}/>
+                        <Input placeholder={"Prénom"}
+                               type={"text"}
                                value={firstname}
-                               onChange={(e) => setFirstname(e.target.value)}
-                               className="placeholder:text-gray-400 rounded-full bg-gray-200 px-4 py-3 w-full"/>
+                               onChange={(e) => setFirstname(e.target.value)}/>
                     </div>
-                    <textarea placeholder="Description"
+                    <TextArea placeholder={"Description"}
                               value={description}
                               onChange={(e) => setDescription(e.target.value)}
-                              className="placeholder:text-gray-400 rounded-xl bg-gray-200 px-4 py-3 w-full"
                               rows={8}/>
                     <div className={`flex items-center justify-start gap-1 w-full ${onModification ? "" : "hidden"}`}>
                         <WarningIcon className="[&_path]:fill-amber-600"/>
