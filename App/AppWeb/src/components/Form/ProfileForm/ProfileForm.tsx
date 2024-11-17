@@ -13,7 +13,6 @@ import {TrashIcon} from "@/components/Icons/TrashIcon";
 export default function ProfileForm({session}: any) {
     const [lastname, setLastname] = useState(session.user.lastname);
     const [firstname, setFirstname] = useState(session.user.firstname);
-    const [email, setEmail] = useState(session.user.email);
     const [description, setDescription] = useState(session.user.description);
     const [imgProfile, setImgProfile] = useState(session.user.imgProfile);
 
@@ -28,20 +27,19 @@ export default function ProfileForm({session}: any) {
     useEffect(() => {
         if (lastname !== session.user.lastname ||
             firstname !== session.user.firstname ||
-            email !== session.user.email ||
             description !== session.user.description ||
             imgProfile !== session.user.imgProfile) {
             setOnModification(true);
         } else {
             setOnModification(false);
         }
-    }, [description, email, firstname, imgProfile, lastname,
-        session.user.description, session.user.email, session.user.firstname, session.user.imgProfile, session.user.lastname]);
+    }, [description, firstname, imgProfile, lastname,
+        session.user.description, session.user.firstname, session.user.imgProfile, session.user.lastname]);
 
     function handleSubmitForm(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const result = updateDB(session.user.id, lastname, firstname, description, email, imgProfile);
+        const result = updateDB(session.user.id, lastname, firstname, description, imgProfile);
 
         console.log(result);
     }
@@ -131,11 +129,6 @@ export default function ProfileForm({session}: any) {
                                onChange={(e) => setFirstname(e.target.value)}
                                className="placeholder:text-gray-400 rounded-full bg-gray-200 px-4 py-3 w-full"/>
                     </div>
-                    <input type="email"
-                           placeholder="Email"
-                           value={email}
-                           onChange={(e) => setEmail(e.target.value)}
-                           className="placeholder:text-gray-400 rounded-full bg-gray-200 px-4 py-3 w-full"/>
                     <textarea placeholder="Description"
                               value={description}
                               onChange={(e) => setDescription(e.target.value)}
