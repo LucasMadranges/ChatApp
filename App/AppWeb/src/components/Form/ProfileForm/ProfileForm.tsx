@@ -1,5 +1,5 @@
 "use client";
-import {FormEvent, useRef, useState} from "react";
+import {FormEvent, useEffect, useRef, useState} from "react";
 import Image from "next/image";
 import {AddCircleIcon} from "@/components/Icons/AddCircleIcon";
 import {WarningIcon} from "@/components/Icons/WarningIcon";
@@ -8,6 +8,7 @@ import Modal from "@/components/Modal/Modal";
 import Buttons from "@/components/Buttons/Buttons";
 import "cropperjs/dist/cropper.css";
 import {Cropper} from "react-cropper";
+import {TrashIcon} from "@/components/Icons/TrashIcon";
 
 export default function ProfileForm({session}: any) {
     const [lastname, setLastname] = useState(session.user.lastname);
@@ -15,16 +16,32 @@ export default function ProfileForm({session}: any) {
     const [email, setEmail] = useState(session.user.email);
     const [description, setDescription] = useState(session.user.description);
     const [imgProfile, setImgProfile] = useState(session.user.imgProfile);
+
     const [changeImage, setChangeImage] = useState("");
     const [isModalShow, setIsModalShow] = useState(false);
+
+    const [onModification, setOnModification] = useState(false);
 
     const refFile: any = useRef(0);
     const refCropper: any = useRef(0);
 
+    useEffect(() => {
+        if (lastname !== session.user.lastname ||
+            firstname !== session.user.firstname ||
+            email !== session.user.email ||
+            description !== session.user.description ||
+            imgProfile !== session.user.imgProfile) {
+            setOnModification(true);
+        } else {
+            setOnModification(false);
+        }
+    }, [description, email, firstname, imgProfile, lastname,
+        session.user.description, session.user.email, session.user.firstname, session.user.imgProfile, session.user.lastname]);
+
     function handleSubmitForm(event: FormEvent<HTMLFormElement>) {
         event.preventDefault();
 
-        const result = updateDB(session.user.id, lastname, firstname, description, imgProfile);
+        const result = updateDB(session.user.id, lastname, firstname, description, email, imgProfile);
 
         console.log(result);
     }
@@ -55,6 +72,20 @@ export default function ProfileForm({session}: any) {
         }
     }
 
+    function handleResetProfilePicture() {
+        setImgProfile(session.user.imgProfile);
+    }
+
+    function handleResetAllValue(e: any) {
+        e.preventDefault();
+
+        setLastname(session.user.lastname);
+        setFirstname(session.user.firstname);
+        setDescription(session.user.description);
+        setEmail(session.user.email);
+        setImgProfile(session.user.imgProfile);
+    }
+
     return (
         <>
             <form onSubmit={handleSubmitForm}
@@ -64,7 +95,7 @@ export default function ProfileForm({session}: any) {
                        hidden
                        accept="image/png, image/jpeg, image/webp"
                        onInput={handleChangePicture}/>
-                <div className="flex flex-col gap-4 justify-center items-center">
+                <div className="flex flex-col gap-4 justify-center items-center relative">
                     <div className="group relative hover:cursor-pointer"
                          onClick={() => {
                              refFile.current.click();
@@ -78,6 +109,12 @@ export default function ProfileForm({session}: any) {
                         </div>
                         <AddCircleIcon className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 hidden lg:group-hover:block transition z-10 h-12 w-12"/>
                     </div>
+                    {session.user.imgProfile !== imgProfile &&
+                        <Buttons handleClick={handleResetProfilePicture}
+                                 className={"absolute top-0 lg:right-0 right-4 bg-white rounded-full border border-gray-200 p-2 lg:group-hover:blur-0"}>
+                            <TrashIcon className={"lg:w-4 w-6 h-auto"}/>
+                        </Buttons>
+                    }
                     <Buttons className={"bg-green-600 hover:bg-green-700 text-white px-4 py-2 lg:hidden"}
                              handleClick={() => refFile.current.click()}>Modifier l&apos;image</Buttons>
                 </div>
@@ -104,12 +141,13 @@ export default function ProfileForm({session}: any) {
                               onChange={(e) => setDescription(e.target.value)}
                               className="placeholder:text-gray-400 rounded-xl bg-gray-200 px-4 py-3 w-full"
                               rows={8}/>
-                    <div className="flex items-center justify-start gap-1 w-full">
+                    <div className={`flex items-center justify-start gap-1 w-full ${onModification ? "" : "hidden"}`}>
                         <WarningIcon className="[&_path]:fill-amber-600"/>
                         <span className="text-sm text-amber-600">Des modifications ne sont pas enregistrées</span>
                     </div>
                     <div className="w-full flex flex-col sm:flex-row justify-end items-center gap-8">
-                        <Buttons className={"hover:text-green-700 w-full sm:w-fit"}>Annuler</Buttons>
+                        <Buttons handleClick={handleResetAllValue}
+                                 className={"hover:text-green-700 w-full sm:w-fit"}>Annuler</Buttons>
                         <Buttons className={"bg-green-600 hover:bg-green-700 text-white px-4 py-2 w-full sm:w-fit "}>
                             Sauvegarder
                         </Buttons>
